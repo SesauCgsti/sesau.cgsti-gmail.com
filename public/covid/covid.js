@@ -191,7 +191,7 @@ async function buscaNotificacoes() {
     }
   
  
-    await axios.get('http://localhost:8000/covid/coordenadas', { params: { inicio, fim } })
+    await axios.get('/covid/coordenadas', { params: { inicio, fim } })
         .then(response => {
             console.log(response)
             busca(response.data)
