@@ -56,7 +56,25 @@ $lista['total']=[];
   $t_notificado = 0;
   $t_descartado = 0;
 
-  foreach ($datas as $dia) {
+///funçao para fazer o range de datas
+$min= $datas->min('dt_coleta');
+
+$dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
+$dtmax = Carbon::now();
+$datasnot=[];
+
+$dtcorrente=$dtmin;
+$cont=1;
+while ($dtcorrente <= $dtmax) {
+array_push($datasnot,$dtcorrente->format('Y-m-d'));
+$cont++;
+$dtcorrente->addDay(1); 
+
+}
+///final funcao data
+
+
+  foreach ($datasnot as $dia) {
    $confirmado = 0;
    $notificado = 0;
    $descartado = 0;
@@ -64,10 +82,10 @@ $lista['total']=[];
    foreach ($dados as $coleta) {
     $out = new \Symfony\Component\Console\Output\ConsoleOutput();
     $out->writeln($coleta->dt_coleta);
-    $out->writeln($dia->dt_coleta);
+    $out->writeln($dia);
     $out->writeln($coleta->resultado);
 
-    if ($coleta->dt_coleta == $dia->dt_coleta) {
+    if ($coleta->dt_coleta == $dia) {
      if ("DESCARTADO" == $coleta->resultado) {
       $descartado++;
       $total++;
@@ -90,9 +108,9 @@ $lista['total']=[];
   
    }
   
-   array_push($lista['confirmados'],['data' => $dia->dt_coleta, 'total' => $confirmado]);
-   array_push($lista['notificados'],['data' => $dia->dt_coleta, 'total' => $notificado]);
-   array_push($lista['descartados'],['data' => $dia->dt_coleta, 'total' => $descartado]);
+   array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
+   array_push($lista['notificados'],['data' => $dia, 'total' => $notificado]);
+   array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
   //  "notificado" => $notificado, 'descartado' => $descartado]);
 
    //   $dados[$dia] =$dados->countBy(function ($dias) {
@@ -221,7 +239,7 @@ $lista['total']=[];
  $dtcorrente->addDay(1); 
  
   }
- 
+ ///final funcao data
  
      $qtddia=1;
  
