@@ -21,21 +21,25 @@ Route::get('/painel', 'HomeController@painel')->name('painel');
 
 
 
+
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 
 
+Route::middleware(['auth'])->group(function () {
 
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('/covid/upload/excel','CovidController@covidExcel');
 
-Route::get('/covid','CovidController@index');
+    Route::get('/covid/excel','CovidController@excel');
+    
+    Route::get('/covid/cep','CovidController@cep');
 
-Route::post('/covid/upload/excel','CovidController@covidExcel');
+    // Route::get('/covid','CovidController@index');    
+});
 
-Route::get('/covid/excel','CovidController@excel');
-
-Route::get('/covid/cep','CovidController@cep');
 
 Route::get('/covid/mapa','CovidController@mapa');
 
