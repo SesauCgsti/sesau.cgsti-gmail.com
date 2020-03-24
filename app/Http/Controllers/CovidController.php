@@ -102,6 +102,21 @@ $url = Excel::import(
 
   }
 
+  public function graficoidade() {
+    return view('covid.graficoidade');
+
+  }
+
+  public function graficoconfirmado() {
+    return view('covid.graficoconfirmado');
+
+  }
+
+  public function graficoconfirmadodia() {
+    return view('covid.graficoconfirmadoDia');
+
+  }
+
   public function log() {
     return Aihms::log();
 

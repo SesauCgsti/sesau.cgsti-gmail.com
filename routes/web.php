@@ -15,11 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+Route::get('/painel', 'HomeController@painel')->name('painel');
+
+
+
 Auth::routes();
 
-
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 
 
 
@@ -35,13 +41,17 @@ Route::get('/covid/mapa','CovidController@mapa');
 
 Route::get('/covid/grafico','CovidController@grafico');
 
-Route::get('/covid/grafico/evolucaofiltro','CovidController@graficoevolucaofiltro');
+Route::get('/covid/grafico/confirmadodia','CovidController@graficoconfirmadodia');
 Route::get('/covid/grafico/sexo','CovidController@graficosexo');
 Route::get('/covid/grafico/somatorio','CovidController@graficosomatorio');
 Route::get('/covid/grafico/diario','CovidController@graficodiario');
 Route::get('/covid/grafico/evolucao','CovidController@graficoevolucao');
+Route::get('/covid/grafico/idade','CovidController@graficoidade');
 
-//Route::get('/covid/grafico/evolucaofiltro','CovidController@graficoevolucaofiltro');
+
+Route::get('/covid/grafico/confirmado','CovidController@graficoconfirmado');
+
+Route::get('/covid/grafico/evolucaofiltro','CovidController@graficoevolucaofiltro');
 
 
 Route::get('/covid/coordenadas','DadosController@coordenadas');

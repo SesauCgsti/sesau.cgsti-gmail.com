@@ -1,15 +1,15 @@
 
 
-buscarDadosConfirmados();
+buscarDadosSexo();
 
 //função para buscar as informaçoes dos dados
-async function buscarDadosConfirmados() {
-    await axios.get('/covid/casosConfirmado', {
+async function buscarDadosSexo() {
+    await axios.get('/covid/casosSexo', {
         //    params: { inicio, fim }
     })
         .then(response => {
             console.log(response)
-            carregarGraficoConfirmado(response.data)
+            carregarGraficoSexo(response.data)
         })
         .catch(error => {
 
@@ -21,7 +21,7 @@ function formatarData(data) {
 }
 
 
-async function carregarGraficoConfirmado(dados) {
+async function carregarGraficoSexo(dados) {
     console.log(dados)
 
 
@@ -31,20 +31,29 @@ async function carregarGraficoConfirmado(dados) {
     // var day = moment("2020-02-25").;
     // console.log(day);
 
-    confirmado = dados.confirmado;
-    dataini = confirmado[0].data;
-    datafim = confirmado[confirmado.length - 1].data;
-    confirmado
-    var dataPointsconfirmado = [];
+    feminino = dados.feminino;
+    dataini = feminino[0].data;
+    datafim = feminino[feminino.length - 1].data;
+    feminino
+    var dataPointsfeminino = [];
+    var dataPointsmasculino = [];
+    var dataPointsnaoInformado = [];
 
 
 
 
 
-    dataPointsconfirmado = dados.confirmado.map(element => {
+    dataPointsfeminino = dados.feminino.map(element => {
         return { x: formatarData(element.data), y: element.total }
     })
 
+    dataPointsnaoInformado = dados.naoInformado.map(element => {
+        return { x: formatarData(element.data), y: element.total }
+    })
+
+    dataPointsmasculino = dados.masculino.map(element => {
+        return { x: formatarData(element.data), y: element.total }
+    })
 
     datainicio = formatarData(dataini).toLocaleDateString();
     //datainicio='dois';
@@ -54,15 +63,15 @@ async function carregarGraficoConfirmado(dados) {
 
 
 
-    var chart = new CanvasJS.Chart("chartContainerConfirmado", {
-      
+    var chart = new CanvasJS.Chart("chartContainerSexo", {
+     
         animationEnabled: true,
       
         axisX: {
             valueFormatString: "DD/MM/YYYY"
         },
         axisY2: {
-      
+     //       title: "CASOS",
             //	prefix: "$",
             //	suffix: "K"
         },
@@ -78,25 +87,37 @@ async function carregarGraficoConfirmado(dados) {
         },
         data: [
 
+            {
+                type: "line",
+                axisYType: "secondary",
+                name: `MASCULINO ( ${dados.total[0].t_masculino} )`,
+                showInLegend: true,
+                markerSize: 5,
+                //indexLabel: `{y}`,
+                dataPoints: dataPointsmasculino
+            },
 
             {
                 type: "line",
-               //type: "spline",  
                 axisYType: "secondary",
-                name: `Confirmado ( ${dados.total[0].total} )`,
-                indexLabel: `{y}`,
-                indexLabelFontSize: 20,
-                indexLabelMaxWidth: 50,
+                name: `FEMININO ( ${dados.total[0].t_feminino} )`,
+                //indexLabel: `{y}`,
+               // indexLabelFontSize: 20,
+              //  indexLabelMaxWidth: 50,
                 showInLegend: true,
-                markerSize: 10,
+                markerSize: 5,
                 indexLabelFontStyle: "oblique",
-                toolTipContent: "<span style=\"color:#C0504E\"><strong>{x} </strong></span> <br><b>{y}<b>",
-               // markerType: "square",
-             //   lineDashType: "dash",
-                dataPoints: dataPointsconfirmado
+                dataPoints: dataPointsfeminino
             },
-
-         
+            {
+                type: "line",
+                axisYType: "secondary",
+                name: `NÃO INFORMADO ( ${dados.total[0].t_naoInformado} )`,
+                showInLegend: true,
+                markerSize: 5,
+                //indexLabel: `{y}`,
+                dataPoints: dataPointsnaoInformado
+            },
 
         ]
     });

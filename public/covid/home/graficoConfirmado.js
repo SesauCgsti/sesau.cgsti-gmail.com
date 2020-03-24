@@ -55,14 +55,15 @@ async function carregarGraficoConfirmado(dados) {
 
 
     var chart = new CanvasJS.Chart("chartContainerConfirmado", {
-      
+    
+        
         animationEnabled: true,
-      
+        
         axisX: {
             valueFormatString: "DD/MM/YYYY"
         },
         axisY2: {
-      
+            title: "CASOS",
             //	prefix: "$",
             //	suffix: "K"
         },
@@ -84,11 +85,9 @@ async function carregarGraficoConfirmado(dados) {
                //type: "spline",  
                 axisYType: "secondary",
                 name: `Confirmado ( ${dados.total[0].total} )`,
-                indexLabel: `{y}`,
-                indexLabelFontSize: 20,
-                indexLabelMaxWidth: 50,
+              
                 showInLegend: true,
-                markerSize: 10,
+                markerSize: 5,
                 indexLabelFontStyle: "oblique",
                 toolTipContent: "<span style=\"color:#C0504E\"><strong>{x} </strong></span> <br><b>{y}<b>",
                // markerType: "square",

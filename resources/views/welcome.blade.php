@@ -95,18 +95,14 @@
 
             <div class="content">
                 <div class=" m-b-md">
-                        <a href="{{ route('login') }}">
+                        <a target="_blank" href="{{ url('/painel') }}">
                     <img src="images/web.png" alt=""> 
                         </a>
                     <div class="login ">
-                    @auth
                   
-                    <a href="{{ url('/home') }}">Ver notificaçoes</a>
-    
-                @else
-                    <a href="{{ route('login') }}">clique aqui para Entrar</a>
+                <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
+     
 
-                @endauth
                     </div>
                       <div class="title">
                             Notifica Campo Grande
@@ -118,12 +114,13 @@
                   
                    
                         @auth
-                            <a href="{{ url('/home') }}">Ver notificaçoes</a>
-            
+                            <a  href="{{ url('/home') }}">Carregar Dados</a>
+                            <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
                         @else
+                        <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
                             <a href="{{ route('login') }}">Login</a>
     
-                            {{-- @if (Route::has('register'))
+                            {{-- @if (Route::has('registloginer'))
                                 <a href="{{ route('register') }}">Register</a>
                             @endif --}}
                         @endauth

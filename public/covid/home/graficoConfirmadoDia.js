@@ -147,11 +147,9 @@ console.log(dataini)
 
    // 
     var chart = new CanvasJS.Chart("chartContainerConfirmadoDIA", {
-        title: {
-            text: `CASOS CONFIRMADOS DE COVID-19 ${datainicio} a ${datafim} ( ${dadosDiario.total[0].total} )`
-        },
+      
         animationEnabled: true,
-        theme: "light2",
+      
         axisX: {
             valueFormatString: "DD/MM/YYYY "
         },
@@ -178,12 +176,11 @@ console.log(dataini)
                //type: "spline",  
                 axisYType: "secondary",
                 name: `Confirmado ( ${dadosDiario.total[0].total} )`,
-                indexLabel: indexLabel,
+  //              indexLabel: indexLabel,
 
-                indexLabelFontSize: 20,
-                indexLabelMaxWidth: 50,
+
                 showInLegend: true,
-                markerSize: 10,
+                markerSize: 5,
                 indexLabelFontStyle: "oblique",
                 toolTipContent: "{x}<br><span style=\"color:#C0504E\"><strong>{dia}ª dia </strong></span><br>{y} Not.",
                // markerType: "square",

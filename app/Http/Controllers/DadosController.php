@@ -277,8 +277,56 @@ $lista['total']=[];
     $datas = COVID::where('resultado','CONFIRMADO')->groupBy('dt_coleta')->orderBy('dt_coleta')->get('dt_coleta');
     //return $datas;
   
-    $dados = COVID::where('resultado','CONFIRMADO')->orderBy('dt_coleta')->get(['dt_coleta', 'sexo']);
-  $lista['feminino']=[];
+    $dados = COVID::where('resultado','CONFIRMADO')->get(['idade']);
+
+
+$um=0;
+$dois=0;
+$tres=0;
+$quatro=0;
+$cinco=0;
+$seis=0;
+$sete=0;
+$oito=0;
+$total=0;
+    foreach ($dados as  $idade) {
+$total++;
+
+      if(strstr($idade,'M') ||strstr($idade,'M') ){
+        $um++;  
+       }
+
+      if($idade->idade >=1 && $idade->idade<=10){
+       $dois++;  
+      }
+      if($idade->idade >=11 && $idade->idade<=20){
+        $tres++;  
+       }
+       if($idade->idade >=21 && $idade->idade<=30){
+        $quatro++;  
+       }
+       if($idade->idade >=31 && $idade->idade<=40){
+        $cinco++;  
+       }
+       if($idade->idade >=41 && $idade->idade<=50){
+        $seis++;  
+       }
+       if($idade->idade >=51 && $idade->idade<=60){
+        $sete++;  
+       }
+       if($idade->idade > 60){
+        $oito++;  
+       }
+
+    }
+    
+return ['total'=>$total,
+'idade'=>[['total'=>$um,'idade'=>'menor 1 ano'],['total'=>$dois,'idade'=>'1 a 10 anos'],['total'=>$tres,'idade'=>'11 a 20 anos'],['quatro'=>$quatro,'idade'=>'21 a 30 anos'],
+['total'=>$cinco,'idade'=>'31 a 40 anos'],['total'=>$seis,'idade'=>'41 a 50 anos'],['total'=>$sete,'idade'=>'51 a 60 anos'],['total'=>$oito,'idade'=>'maior 60 anos']]];
+
+
+
+    $lista['feminino']=[];
   $lista['masculino']=[];
   $lista['naoInformado']=[];
   
@@ -424,7 +472,7 @@ $lista['total']=[];
  $min= $datas->min('dt_coleta');
 
  $dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
- $dtmax = Carbon::now();
+ $dtmax = Carbon::now();//->addDay(300);
  $datasnot=[];
 
 $dtcorrente=$dtmin;
@@ -440,11 +488,12 @@ $dtcorrente->addDay(1);
     $qtddia=1;
 
     foreach ($datasnot as $dia) {
-  
-     foreach ($dados as $coleta) {
       $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-      $out->writeln($coleta->dt_coleta);
       $out->writeln($dia);
+     foreach ($dados as $coleta) {
+   
+//      $out->writeln($coleta->dt_coleta);
+     
      
   
       if ($coleta->dt_coleta == $dia) {
@@ -474,3 +523,6 @@ $dtcorrente->addDay(1);
   
 
 }
+
+
+

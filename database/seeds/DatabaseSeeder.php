@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('imtimaster'),
             'admin' => true,
         ]);
+        DB::table('users')->insert([
+            'name' => 'Administrador',
+            'email' => 'ctigeo@sesau.campogrande.ms.gov.br',
+            'password' => bcrypt('larissa123'),
+            'admin' => true,
+        ]);
 
     }
 }
