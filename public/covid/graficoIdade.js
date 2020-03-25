@@ -36,7 +36,7 @@ async function carregarGraficoIdade(dados) {
 
     var chart = new CanvasJS.Chart("chartContainerIdade", {
         title: {
-            text: `CASOS CONFIRMADOS DE COVID-19 POR IDADE (${dados.total}_`
+            text: `CASOS CONFIRMADOS DE COVID-19 POR IDADE (${dados.total})`
         },
         animationEnabled: true,
         theme: "light2",

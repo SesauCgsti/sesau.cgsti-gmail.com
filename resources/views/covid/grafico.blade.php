@@ -38,6 +38,9 @@
 	<div>
 			<div id="chartContainerIdade" style="height: 300px; width: 100%;"></div>
 		</div>
+		<div>
+			<div id="chartContainerSexo" style="height: 300px; width: 100%;"></div>
+		</div>
 	<script src="/js/canvasjs.min.js"></script>
 	
 	<script src="/covid/grafico.js"></script>
@@ -46,7 +49,7 @@
 	<script src="/covid/graficoSomatorio.js"></script>
 	<script src="/covid/graficoSexo.js"></script>
 
-	{{-- <script src="/covid/graficoIdade.js"></script> --}}
+	<script src="/covid/graficoIdade.js"></script>
 </body>
 
 </html>

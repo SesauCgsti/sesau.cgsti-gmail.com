@@ -31,22 +31,20 @@ class DadosController extends Controller {
  }
 
  public function casosDiarios(Request $request) {
-  if ('' != $request->inicio && '' != $request->fim) {
 
-   return COVID::where('consultacep', true)
-    ->whereDate('dt_coleta', '>=', $request->inicio)
-    ->whereDate('dt_coleta', '<=', $request->fim)
-    ->get(['cep', 'bairro', 'lat', 'lng', 'sexo', 'idade', 'municipio', 'dt_coleta', 'dt_resultado', 'resultado']);
-  }
 
   $datas = COVID::groupBy('dt_coleta')->orderBy('dt_coleta')->get('dt_coleta');
   //return $datas;
 
   $dados = COVID::orderBy('dt_coleta')->get(['dt_coleta', 'resultado']);
-$lista['confirmados']=[];
-$lista['notificados']=[];
-$lista['descartados']=[];
-$lista['total']=[];
+
+  $dadosc= COVID::casosConfirmadoDiarios();
+  //return $dadosc;
+  $lista['confirmados']=$dadosc['confirmado'];
+   $lista['notificados']=[];
+   $lista['descartados']=[];
+   $lista['total']=[];
+
   
   $confirmado = 0;
   $notificado = 0;
@@ -108,7 +106,7 @@ $dtcorrente->addDay(1);
   
    }
   
-   array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
+ //  array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
    array_push($lista['notificados'],['data' => $dia, 'total' => $notificado]);
    array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
   //  "notificado" => $notificado, 'descartado' => $descartado]);
@@ -141,7 +139,8 @@ $dtcorrente->addDay(1);
     //return $datas;
   
     $dados = COVID::orderBy('dt_coleta')->get(['dt_coleta', 'resultado']);
-  $lista['confirmados']=[];
+   $dadosc= COVID::casosConfirmadoDIA();
+ $lista['confirmados']=$dadosc['confirmado'];
   $lista['notificados']=[];
   $lista['descartados']=[];
   $lista['total']=[];
@@ -185,11 +184,13 @@ $dtcorrente->addDay(1);
         $total++;
         $t_descartado++;
        }
+
        if ("CONFIRMADO" == $coleta->resultado) {
         $confirmado++;
         $total++;
         $t_confirmado++;
        }
+
        if ("AGUARDANDO RESULTADO" == $coleta->resultado) {
         $notificado++;
         $total++;
@@ -202,7 +203,7 @@ $dtcorrente->addDay(1);
     
      }
     
-     array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
+  //   array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
      array_push($lista['notificados'],['data' => $dia, 'total' => $notificado]);
      array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
   
@@ -221,10 +222,10 @@ $dtcorrente->addDay(1);
 
    public function casosSexo(Request $request) {
   
-    $datas = COVID::where('resultado','CONFIRMADO')->groupBy('dt_coleta')->orderBy('dt_coleta')->get('dt_coleta');
+    $datas = COVID::where('resultado','CONFIRMADO')->groupBy('dt_resultado')->orderBy('dt_resultado')->get('dt_resultado');
     //return $datas;
   
-    $dados = COVID::where('resultado','CONFIRMADO')->orderBy('dt_coleta')->get(['dt_coleta', 'sexo']);
+    $dados = COVID::where('resultado','CONFIRMADO')->orderBy('dt_resultado')->get(['dt_resultado', 'sexo']);
   $lista['feminino']=[];
   $lista['masculino']=[];
   $lista['naoInformado']=[];
@@ -242,7 +243,7 @@ $dtcorrente->addDay(1);
   $t_feminino=0;
   
   ///funçao para fazer o range de datas
-  $min= $datas->min('dt_coleta');
+  $min= $datas->min('dt_resultado');
 
   $dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
   $dtmax = Carbon::now();
@@ -265,11 +266,11 @@ $dtcorrente->addDay(1);
   
      foreach ($dados as $coleta) {
       $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-      $out->writeln($coleta->dt_coleta);
+      $out->writeln($coleta->dt_resultado);
       $out->writeln($dia);
       $out->writeln($coleta->sexo);
   
-      if ($coleta->dt_coleta == $dia) {
+      if ($coleta->dt_resultado == $dia) {
        if ("F" == $coleta->sexo) {
         $feminino++;
         $total++;
@@ -327,7 +328,7 @@ $total=0;
     foreach ($dados as  $idade) {
 $total++;
 
-      if(strstr($idade,'M') ||strstr($idade,'M') ){
+      if(strstr($idade,'M') ||  strstr($idade,'D')  ){
         $um++;  
        }
 
@@ -337,7 +338,7 @@ $total++;
       if($idade->idade >=11 && $idade->idade<=20){
         $tres++;  
        }
-       if($idade->idade >=21 && $idade->idade<=30){
+       if($idade->idade >= 21 && $idade->idade <=30){
         $quatro++;  
        }
        if($idade->idade >=31 && $idade->idade<=40){
@@ -356,83 +357,83 @@ $total++;
     }
     
 return ['total'=>$total,
-'idade'=>[['total'=>$um,'idade'=>'menor 1 ano'],['total'=>$dois,'idade'=>'1 a 10 anos'],['total'=>$tres,'idade'=>'11 a 20 anos'],['quatro'=>$quatro,'idade'=>'21 a 30 anos'],
+'idade'=>[['total'=>$um,'idade'=>'menor 1 ano'],['total'=>$dois,'idade'=>'1 a 10 anos'],['total'=>$tres,'idade'=>'11 a 20 anos'],['total'=>$quatro,'idade'=>'21 a 30 anos'],
 ['total'=>$cinco,'idade'=>'31 a 40 anos'],['total'=>$seis,'idade'=>'41 a 50 anos'],['total'=>$sete,'idade'=>'51 a 60 anos'],['total'=>$oito,'idade'=>'maior 60 anos']]];
 
 
 
-    $lista['feminino']=[];
-  $lista['masculino']=[];
-  $lista['naoInformado']=[];
+//     $lista['feminino']=[];
+//   $lista['masculino']=[];
+//   $lista['naoInformado']=[];
   
-  $lista['total']=[];
+//   $lista['total']=[];
     
-    $masculino = 0;
-    $feminino = 0;
-    $naoInformado=0;
-    $descartado = 0;
-    $total=0;
+//     $masculino = 0;
+//     $feminino = 0;
+//     $naoInformado=0;
+//     $descartado = 0;
+//     $total=0;
 
-  $t_naoInformado=0;
-  $t_masculino=0;
-  $t_feminino=0;
+//   $t_naoInformado=0;
+//   $t_masculino=0;
+//   $t_feminino=0;
 
-  ///funçao para fazer o range de datas
-  $min= $datas->min('dt_coleta');
+//   ///funçao para fazer o range de datas
+//   $min= $datas->min('dt_coleta');
 
-  $dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
-  $dtmax = Carbon::now();
-  $datasnot=[];
+//   $dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
+//   $dtmax = Carbon::now();
+//   $datasnot=[];
  
- $dtcorrente=$dtmin;
- $cont=1;
-  while ($dtcorrente <= $dtmax) {
- array_push($datasnot,$dtcorrente->format('Y-m-d'));
- $cont++;
- $dtcorrente->addDay(1); 
+//  $dtcorrente=$dtmin;
+//  $cont=1;
+//   while ($dtcorrente <= $dtmax) {
+//  array_push($datasnot,$dtcorrente->format('Y-m-d'));
+//  $cont++;
+//  $dtcorrente->addDay(1); 
  
-  }
+//   }
  
  
-     $qtddia=1;
+//      $qtddia=1;
  
-     foreach ($datasnot as $dia) {
+//      foreach ($datasnot as $dia) {
 
   
-     foreach ($dados as $coleta) {
+//      foreach ($dados as $coleta) {
       
-      if ($coleta->dt_coleta == $dia) {
-       if ("F" == $coleta->sexo) {
-        $feminino++;
-        $total++;
-        $t_feminino++;
-       }
-       if ("M" == $coleta->sexo) {
-        $masculino++;
-        $total++;
-        $t_masculino++;
-       }
-       if ("F" != $coleta->sexo && "M" != $coleta->sexo) {
-        $naoInformado++;
-        $total++;
-        $t_naoInformado++;
-       }
+//       if ($coleta->dt_coleta == $dia) {
+//        if ("F" == $coleta->sexo) {
+//         $feminino++;
+//         $total++;
+//         $t_feminino++;
+//        }
+//        if ("M" == $coleta->sexo) {
+//         $masculino++;
+//         $total++;
+//         $t_masculino++;
+//        }
+//        if ("F" != $coleta->sexo && "M" != $coleta->sexo) {
+//         $naoInformado++;
+//         $total++;
+//         $t_naoInformado++;
+//        }
   
-      }
+//       }
   
       
     
-     }
+//      }
     
-     array_push($lista['feminino'],['data' => $dia, 'total' => $feminino]);
-     array_push($lista['masculino'],['data' => $dia, 'total' => $masculino]);
-     array_push($lista['naoInformado'],['data' => $dia, 'total' => $naoInformado]);
+//      array_push($lista['feminino'],['data' => $dia, 'total' => $feminino]);
+//      array_push($lista['masculino'],['data' => $dia, 'total' => $masculino]);
+//      array_push($lista['naoInformado'],['data' => $dia, 'total' => $naoInformado]);
   
-    }
-    array_push($lista['total'],['total'=>$total,'t_masculino'=>$t_masculino,'t_feminino'=>$t_feminino,'t_naoInformado'=>$naoInformado]);
+//     }
+//     array_push($lista['total'],['total'=>$total,'t_masculino'=>$t_masculino,'t_feminino'=>$t_feminino,'t_naoInformado'=>$naoInformado]);
   
   
-    return $lista;
+//     return $lista;
   
    }
 
@@ -440,65 +441,71 @@ return ['total'=>$total,
 
    public function casosConfirmado(Request $request) {
   
-    $datas = COVID::where('resultado','CONFIRMADO')->groupBy('dt_coleta')->orderBy('dt_coleta')->get('dt_coleta');
-    //return $datas;
-  
-    $dados = COVID::where('resultado','CONFIRMADO')->orderBy('dt_coleta')->get(['dt_coleta']);
-  $lista['confirmado']=[];
 
-  $lista['total']=[];
+    $dadosc= COVID::casosConfirmadoDIA();
+    $lista['total']=[ ['total'=>$dadosc['total']]];
+ $lista['confirmado']=$dadosc['confirmado'];
+
+
+    return $lista;
+
+//     $datas = COVID::where('resultado','CONFIRMADO')->groupBy('dt_resultado')->orderBy('dt_resultado')->get('dt_resultado');
+//     //return $datas;
+  
+//     $dados = COVID::where('resultado','CONFIRMADO')->orderBy('dt_resultado')->get(['dt_resultado']);
+//   $lista['confirmado']=[];
+
+//   $lista['total']=[];
     
-    $confirmado = 0;
+//     $confirmado = 0;
  
-    $total=0;
+//     $total=0;
 
-  ///funçao para fazer o range de datas
-  $min= $datas->min('dt_coleta');
+//   ///funçao para fazer o range de datas
+//   $min= $datas->min('dt_resultado');
 
-  $dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
-  $dtmax = Carbon::now();
-  $datasnot=[];
+//   $dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
+//   $dtmax = Carbon::now();
+//   $datasnot=[];
  
- $dtcorrente=$dtmin;
- $cont=1;
-  while ($dtcorrente <= $dtmax) {
- array_push($datasnot,$dtcorrente->format('Y-m-d'));
- $cont++;
- $dtcorrente->addDay(1); 
+//  $dtcorrente=$dtmin;
+//  $cont=1;
+//   while ($dtcorrente <= $dtmax) {
+//  array_push($datasnot,$dtcorrente->format('Y-m-d'));
+//  $cont++;
+//  $dtcorrente->addDay(1); 
  
-  }
- ///final funcao data
+//   }
+//  ///final funcao data
  
-    foreach ($datasnot as $dia) {
+//     foreach ($datasnot as $dia) {
   
-     foreach ($dados as $coleta) {
-      $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-      $out->writeln($coleta->dt_coleta);
-      $out->writeln($dia);
+//      foreach ($dados as $coleta) {
+//       $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+//       $out->writeln($coleta->dt_resultado);
+//       $out->writeln($dia);
      
   
-      if ($coleta->dt_coleta == $dia) {
+//       if ($coleta->dt_resultado == $dia) {
              
         
-        $total++;
+//         $total++;
         
-        $confirmado++;
-       }
+//         $confirmado++;
+//        }
   
      
   
       
     
-     }
+//      }
     
-     array_push($lista['confirmado'],['data' => $dia, 'total' => $confirmado]);
+//      array_push($lista['confirmado'],['data' => $dia, 'total' => $confirmado]);
    
   
-    }
-    array_push($lista['total'],['total'=>$total]);
+//     }
+//     array_push($lista['total'],['total'=>$total]);
   
-  
-    return $lista;
   
    }
   
@@ -508,11 +515,14 @@ return ['total'=>$total,
 
    public function casosConfirmadoDIA(Request $request) {
   
-    $datas = COVID::where('resultado','CONFIRMADO')->groupBy('dt_coleta')->orderBy('dt_coleta')->get('dt_coleta');
+
+$lista =COVID::casosConfirmadoDIA();
+
+    $datas = COVID::where('resultado','CONFIRMADO')->groupBy('dt_resultado')->orderBy('dt_resultado')->get('dt_resultado');
     //return $datas;
  
-    $dados = COVID::where('resultado','CONFIRMADO')->orderBy('dt_coleta')->get(['dt_coleta']);
-  $lista['confirmado']=[];
+    $dados = COVID::where('resultado','CONFIRMADO')->orderBy('dt_resultado')->get(['dt_resultado']);
+//  $lista['confirmado']=[];
 
   $lista['total']=[];
     
@@ -520,7 +530,7 @@ return ['total'=>$total,
  
     $total=0;
 
- $min= $datas->min('dt_coleta');
+ $min= $datas->min('dt_resultado');
 
  $dtmin = Carbon::createFromFormat('Y-m-d H:i:s', $min.' 00:00:00');//->format('Y-m-d');
  $dtmax = Carbon::now();//->addDay(300);
@@ -543,11 +553,11 @@ $dtcorrente->addDay(1);
       $out->writeln($dia);
      foreach ($dados as $coleta) {
    
-//      $out->writeln($coleta->dt_coleta);
+//      $out->writeln($coleta->dt_resultado);
      
      
   
-      if ($coleta->dt_coleta == $dia) {
+      if ($coleta->dt_resultado == $dia) {
          
         
         $total++;
@@ -561,7 +571,7 @@ $dtcorrente->addDay(1);
     
      }
     
-     array_push($lista['confirmado'],['data' => $dia, 'total' => $confirmado,'qtdia'=>$qtddia++]);
+  //   array_push($lista['confirmado'],['data' => $dia, 'total' => $confirmado,'qtdia'=>$qtddia++]);
    
   
     }
