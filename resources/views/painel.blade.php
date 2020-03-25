@@ -173,7 +173,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-3">
+                    {{-- <div class="col-4 mb-3">
                             <a target="_blank" href="{{ url('covid/grafico/evolucaofiltro') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -185,7 +185,7 @@
                                     </div>
                                 </div>
                             </a>
-                    </div>
+                    </div> --}}
 
 
                 {{-- </ div> --}}

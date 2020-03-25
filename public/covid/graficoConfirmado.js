@@ -55,7 +55,9 @@ async function carregarGraficoConfirmado(dados) {
 
 
     var chart = new CanvasJS.Chart("chartContainerConfirmado", {
-      
+        title: {
+            text: `CASOS CONFIRMADOS DE COVID-19 ${datainicio} a ${datafim} ( ${dados.total[0].total} )`
+        },
         animationEnabled: true,
       
         axisX: {
