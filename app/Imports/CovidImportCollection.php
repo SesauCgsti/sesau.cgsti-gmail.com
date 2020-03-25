@@ -2,8 +2,8 @@
 
 namespace App\Imports;
 
-use Carbon\Carbon;
 use App\COVID;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
@@ -43,18 +43,19 @@ class COVIDImportCollection implements ToCollection {
    $out->writeln($resultado);
 
    COVID::updateOrCreate([
-    'id_caso'   => $row[0],
-    'sexo'      => $row[1],
-    'idade'     => $row[2],
-    'cep'       => $row[6],
-    'municipio' => $row[7],
-    'bairro'    => $row[8],
+    'id_caso' => $row[0],
    ],
-    
-   ['dt_resultado' => $resultado,
-     'dt_coleta'     => $coleta,
-    'resultado' => $row[3]
-   ]);
+    [
+     'sexo'         => $row[1],
+     'idade'        => $row[2],
+     'cep'          => $row[6],
+     'municipio'    => $row[7],
+     'bairro'       => $row[8],
+     'dt_resultado' => $resultado,
+     'dt_coleta'    => $coleta,
+     'resultado'    => $row[3],
+    ]
+   );
   }
  }
 }
