@@ -1,8 +1,8 @@
 @extends('layouts.painel')
 <style>
     img {
-        width: 150px;
-        height: 150px;
+        width: 225px;
+        height: 225px;
         align-self: center;
 
     }
@@ -85,7 +85,7 @@
                             <a target="_blank" href="{{ url('/covid/grafico/confirmado') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
-                                                <h4 class="card-title mb-1 mt-1 text-bold text-white text-center">CASOS CONFIRMADOS</h4>
+                                                <h5 class="card-title mb-1 mt-1 text-bold text-white text-center">CASOS CONFIRMADOS / DIA</h5>
                                             </div>                       
                                     
                                     <div class="card-body pt-0 pb-0">
@@ -99,7 +99,7 @@
                             <a target="_blank" href="{{ url('/covid/grafico/diario') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
-                                                <h4 class="card-title mb-1 mt-1 text-bold text-white text-center">CASOS DIARIOS</h4>
+                                                <h5 class="card-title mb-1 mt-1 text-bold text-white text-center">CASOS NOT./CONF./DESCART. DIARIOS</h5>
                                             </div>                       
                                     
                                     <div class="card-body pt-0 pb-0">
@@ -114,7 +114,7 @@
                             <a target="_blank" href="{{ url('/covid/grafico/somatorio') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
-                                                <h4 class="card-title mb-1 mt-1 text-bold text-white text-center">CASOS SOMADOS</h4>
+                                                <h5 class="card-title mb-1 mt-1 text-bold text-white text-center">TOTAL CASOS NOT./CONF./DESCART. </h5>
                                             </div>                       
                                     
                                     <div class="card-body pt-0 pb-0">
@@ -129,7 +129,7 @@
                             <a target="_blank" href="{{ url('/covid/grafico/sexo') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
-                                                <h4 class="card-title mb-1 mt-1 text-bold text-white text-center">CASOS SEXO</h4>
+                                                <h5 class="card-title mb-1 mt-1 text-bold text-white text-center">TOTAL CASOS / SEXO</h5>
                                             </div>                       
                                     
                                     <div class="card-body pt-0 pb-0">
@@ -144,7 +144,7 @@
                             <a target="_blank" href="{{ url('/covid/grafico/idade') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
-                                                <h4 class="card-title mb-1 mt-1 text-bold text-white text-center">CASOS IDADE</h4>
+                                                <h5 class="card-title mb-1 mt-1 text-bold text-white text-center">TOTAL CASOS / IDADE</h5>
                                             </div>                       
                                     
                                     <div class="card-body pt-0 pb-0">
@@ -159,16 +159,11 @@
                             <a target="_blank" href="{{ url('/covid/mapa') }}">
                                 <div class="card border-primary ">
                                     <div class="bg-primary">
-                                            <h4 class="card-title mb-1 mt-1 text-bold text-white text-center">Mapa das notificações </h4>
+                                            <h5 class="card-title mb-1 mt-1 text-uppercase text-bold text-white text-center">Mapa das notificações </h5>
                                     </div>
 
                                     <img src="images/mapa.png" alt="">
-                                    <div class="card-body pt-0 pb-0">
-
-                                        <p class="card-text">Possivel visualizar as notificaçoes por status de acordo
-                                            com o cep fornecido identificando o centro da rua</p>
-                                       
-                                    </div>
+                                    
                                 </div>
                             </a>
                     </div>
