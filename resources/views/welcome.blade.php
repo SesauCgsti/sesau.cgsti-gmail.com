@@ -120,7 +120,7 @@
                         @else
                         <a href="{{ route('login') }}">Login</a>
                         <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
-                        <a target="_blank" href="{{ url('/covid/mapaAgrupado') }}">VISUALIZAR MAPA</a>
+                        <a target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS CONFIRMADOS</a>
  
     
                             {{-- @if (Route::has('registloginer'))
