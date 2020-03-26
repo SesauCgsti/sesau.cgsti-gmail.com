@@ -1,28 +1,17 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-	<script src="{{ asset('js/app.js') }}" defer></script>
-
-	
-	<script src="/leaflet/axios.min.js"></script>
-	<script>
+@extends('layouts.grafico')
 
 
-	</script>
-</head>
+@section('content')
 
-<body>
-	<div>
+
+<div class="border rounded m-2 ">
+
 	<div id="chartContainerSomatorio" style="height: 300px; width: 100%;"></div>
 </div>
 <div>
-	
+
 	<script src="/js/canvasjs.min.js"></script>
-	
+
 	<script src="/covid/graficoSomatorio.js"></script>
 
-	{{-- <script src="/covid/graficoIdade.js"></script> --}}
-</body>
-
-</html>
+@endsection

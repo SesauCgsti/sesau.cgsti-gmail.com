@@ -116,9 +116,12 @@
                         @auth
                             <a  href="{{ url('/home') }}">Carregar Dados</a>
                             <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
+                            <a target="_blank" href="{{ url('/painel') }}">Visualizar MAPA</a>
                         @else
+                        <a href="{{ route('login') }}">Login</a>
                         <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
-                            <a href="{{ route('login') }}">Login</a>
+                        <a target="_blank" href="{{ url('/covid/mapaAgrupado') }}">VISUALIZAR MAPA</a>
+ 
     
                             {{-- @if (Route::has('registloginer'))
                                 <a href="{{ route('register') }}">Register</a>

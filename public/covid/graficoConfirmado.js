@@ -59,6 +59,7 @@ async function carregarGraficoConfirmado(dados) {
             text: `CASOS CONFIRMADOS DE COVID-19 ${datainicio} a ${datafim} ( ${dados.total[0].total} )`
         },
         animationEnabled: true,
+        theme: "light2",
       
         axisX: {
             valueFormatString: "DD/MM/YYYY"

@@ -73,7 +73,7 @@ function formatarData(data){
     
              var chart = new CanvasJS.Chart("chartContainerSomatorio", {
         title: {
-            text: `CASOS NOTIFICADOS SOMATÓRIO CAMPO GRANDE ${datainicio} a ${datafim} ( ${dados.total[0].total} )`
+            text: `CASOS CAMPO GRANDE ${datainicio} a ${datafim} ( ${dados.total[0].total} )`
                  },
                   theme: "light2",
                  

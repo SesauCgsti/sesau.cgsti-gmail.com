@@ -61,6 +61,13 @@ $url = Excel::import(
 
   }
 
+  public function mapaAgrupado() {
+
+    return view('covid.mapaAgrupado');
+  
+    }
+  
+
 
   public function cep() {
 

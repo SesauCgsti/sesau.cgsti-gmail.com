@@ -163,6 +163,88 @@ class COVID extends Model {
  }
 
 
+ public static function casosDescartadoDIA() {
+   $datas = COVID::where('resultado', 'DESCARTADO')->get('dt_resultado')->min('dt_resultado');
+   $dados               = COVID::where('resultado', 'DESCARTADO')->orderBy('dt_resultado')->get(['dt_resultado']);
+   $lista['descartado'] = [];
+   $lista['total'] = [];
+   $confirmado = 0;
+   $total = 0;
+   $min = $datas;
+ 
+   $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+   $dtmax    = Carbon::now(); //->addDay(300);
+   $datasnot = [];
+ 
+   $dtcorrente = $dtmin;
+   $cont       = 1;
+   while ($dtcorrente <= $dtmax) {
+    array_push($datasnot, $dtcorrente->format('Y-m-d'));
+    $cont++;
+    $dtcorrente->addDay(1);
+ 
+   }
+ 
+   $qtddia = 1;
+ 
+   foreach ($datasnot as $dia) {
+      $confirmado = 0; 
+    foreach ($dados as $coleta) {
+ 
+     if ($coleta->dt_resultado == $dia) {
+      $total++;
+      $confirmado++;
+     }
+    }
+    array_push($lista['descartado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+   }
+    array_push($lista['total'],$total);
+   return $lista;
+ 
+  }
+
+  public static function casosDescartadoSomados() {
+   $datas = COVID::where('resultado', 'DESCARTADO')->get('dt_resultado')->min('dt_resultado');
+   $dados               = COVID::where('resultado', 'DESCARTADO')->orderBy('dt_resultado')->get(['dt_resultado']);
+   $lista['descartado'] = [];
+   $lista['total'] = [];
+   $confirmado = 0;
+   $total = 0;
+   $min = $datas;
+ 
+   $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+   $dtmax    = Carbon::now(); //->addDay(300);
+   $datasnot = [];
+ 
+   $dtcorrente = $dtmin;
+   $cont       = 1;
+   while ($dtcorrente <= $dtmax) {
+    array_push($datasnot, $dtcorrente->format('Y-m-d'));
+    $cont++;
+    $dtcorrente->addDay(1);
+ 
+   }
+ 
+   $qtddia = 1;
+ 
+   foreach ($datasnot as $dia) {
+  //    $confirmado = 0; 
+    foreach ($dados as $coleta) {
+ 
+     if ($coleta->dt_resultado == $dia) {
+      $total++;
+      $confirmado++;
+     }
+    }
+    array_push($lista['descartado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+   }
+    array_push($lista['total'],$total);
+   return $lista;
+ 
+  }
+
+
+
  public static function casosConfirmadoDiarios() {
     $datas = COVID::where('resultado', 'CONFIRMADO')->get('dt_resultado')->min('dt_resultado');
     $dados               = COVID::where('resultado', 'CONFIRMADO')->orderBy('dt_resultado')->get(['dt_resultado']);

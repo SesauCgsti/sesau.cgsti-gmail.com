@@ -17,7 +17,8 @@ class DadosController extends Controller {
   * @param  mixed $request
   * @return void
   */
- public function coordenadas(Request $request) {
+ 
+  public function coordenadas(Request $request) {
 
   if ('' != $request->inicio && '' != $request->fim) {
 
@@ -27,6 +28,19 @@ class DadosController extends Controller {
   }
 
   return COVID::get(['cep', 'bairro', 'lat', 'lng', 'sexo', 'idade', 'municipio', 'dt_coleta', 'dt_resultado', 'resultado']);
+
+ }
+
+ public function coordenadasConfirmado(Request $request) {
+
+  if ('' != $request->inicio && '' != $request->fim) {
+
+   return COVID::whereDate('dt_resultado', '>=', $request->inicio)
+    ->whereDate('dt_resultado', '<=', $request->fim)
+    ->get(['id_caso','cep', 'bairro', 'lat', 'lng', 'sexo', 'idade', 'municipio', 'dt_coleta', 'dt_resultado', 'resultado']);
+  }
+
+  return COVID::get([ 'id_caso','cep', 'bairro', 'lat', 'lng', 'sexo', 'idade', 'municipio', 'dt_coleta', 'dt_resultado', 'resultado']);
 
  }
 
@@ -41,8 +55,12 @@ class DadosController extends Controller {
   $dadosc= COVID::casosConfirmadoDiarios();
   //return $dadosc;
   $lista['confirmados']=$dadosc['confirmado'];
+
+  $dadosd= COVID::casosDescartadoDIA();
+  $lista['descartados']=$dadosd['descartado'];
+
    $lista['notificados']=[];
-   $lista['descartados']=[];
+  // $lista['descartados']=[];
    $lista['total']=[];
 
   
@@ -108,7 +126,7 @@ $dtcorrente->addDay(1);
   
  //  array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
    array_push($lista['notificados'],['data' => $dia, 'total' => $notificado]);
-   array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
+  // array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
   //  "notificado" => $notificado, 'descartado' => $descartado]);
 
    //   $dados[$dia] =$dados->countBy(function ($dias) {
@@ -140,9 +158,12 @@ $dtcorrente->addDay(1);
   
     $dados = COVID::orderBy('dt_coleta')->get(['dt_coleta', 'resultado']);
    $dadosc= COVID::casosConfirmadoDIA();
+
+   $dadosd= COVID::casosDescartadoSomados();
+   $lista['descartados']=$dadosd['descartado'];
  $lista['confirmados']=$dadosc['confirmado'];
   $lista['notificados']=[];
-  $lista['descartados']=[];
+ 
   $lista['total']=[];
     
     $confirmado = 0;
@@ -205,7 +226,7 @@ $dtcorrente->addDay(1);
     
   //   array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
      array_push($lista['notificados'],['data' => $dia, 'total' => $notificado]);
-     array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
+    // array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
   
     }
     array_push($lista['total'],['total'=>$total,'t_notificado'=>$t_notificado,'t_confirmado'=>$t_confirmado,'t_descartado'=>$t_descartado]);

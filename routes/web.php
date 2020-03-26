@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/covid/mapa','CovidController@mapa');
 
+Route::get('/covid/mapaAgrupado','CovidController@mapaAgrupado');
+
 Route::get('/covid/grafico','CovidController@grafico');
 
 Route::get('/covid/grafico/confirmadodia','CovidController@graficoconfirmadodia');
@@ -59,6 +61,7 @@ Route::get('/covid/grafico/evolucaofiltro','CovidController@graficoevolucaofiltr
 
 
 Route::get('/covid/coordenadas','DadosController@coordenadas');
+Route::get('/covid/coordenadasConfirmado','DadosController@coordenadasConfirmado');
 Route::get('/covid/casosDiarios','DadosController@casosDiarios');
 Route::get('/covid/casosDiariosSomatorio','DadosController@casosDiariosSomatorio');
 Route::get('/covid/casosSexo','DadosController@casosSexo');
