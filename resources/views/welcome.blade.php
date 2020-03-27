@@ -116,7 +116,7 @@
                         @auth
                             <a  href="{{ url('/home') }}">Carregar Dados</a>
                             <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
-                            <a target="_blank" href="{{ url('/painel') }}">Visualizar MAPA</a>
+                            <a target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS CONFIRMADOS</a>
                         @else
                         <a href="{{ route('login') }}">Login</a>
                         <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>

@@ -122,14 +122,14 @@ class COVID extends Model {
   //return redirect('/covid');
  }
 
- public static function casosConfirmadoDIA() {
-  $datas = COVID::where('resultado', 'CONFIRMADO')->get('dt_resultado')->min('dt_resultado');
+ public static function casosConfirmadoSomados() {
+  $datas               = COVID::where('resultado', 'CONFIRMADO')->get('dt_resultado')->min('dt_resultado');
   $dados               = COVID::where('resultado', 'CONFIRMADO')->orderBy('dt_resultado')->get(['dt_resultado']);
   $lista['confirmado'] = [];
-  $lista['total'] = [];
-  $confirmado = 0;
-  $total = 0;
-  $min = $datas;
+  $lista['total']      = [];
+  $confirmado          = 0;
+  $total               = 0;
+  $min                 = $datas;
 
   $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
   $dtmax    = Carbon::now(); //->addDay(300);
@@ -157,133 +157,253 @@ class COVID extends Model {
    }
    array_push($lista['confirmado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
   }
-   array_push($lista['total'],$total);
+  array_push($lista['total'], $total);
   return $lista;
 
  }
 
-
  public static function casosDescartadoDIA() {
-   $datas = COVID::where('resultado', 'DESCARTADO')->get('dt_resultado')->min('dt_resultado');
-   $dados               = COVID::where('resultado', 'DESCARTADO')->orderBy('dt_resultado')->get(['dt_resultado']);
-   $lista['descartado'] = [];
-   $lista['total'] = [];
-   $confirmado = 0;
-   $total = 0;
-   $min = $datas;
- 
-   $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
-   $dtmax    = Carbon::now(); //->addDay(300);
-   $datasnot = [];
- 
-   $dtcorrente = $dtmin;
-   $cont       = 1;
-   while ($dtcorrente <= $dtmax) {
-    array_push($datasnot, $dtcorrente->format('Y-m-d'));
-    $cont++;
-    $dtcorrente->addDay(1);
- 
-   }
- 
-   $qtddia = 1;
- 
-   foreach ($datasnot as $dia) {
-      $confirmado = 0; 
-    foreach ($dados as $coleta) {
- 
-     if ($coleta->dt_resultado == $dia) {
-      $total++;
-      $confirmado++;
-     }
-    }
-    array_push($lista['descartado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
-   }
-    array_push($lista['total'],$total);
-   return $lista;
- 
+  $datas               = COVID::where('resultado', 'DESCARTADO')->get('dt_resultado')->min('dt_resultado');
+  $dados               = COVID::where('resultado', 'DESCARTADO')->orderBy('dt_resultado')->get(['dt_resultado']);
+  $lista['descartado'] = [];
+  $lista['total']      = [];
+  $confirmado          = 0;
+  $total               = 0;
+  $min                 = $datas;
+
+  $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+  $dtmax    = Carbon::now(); //->addDay(300);
+  $datasnot = [];
+
+  $dtcorrente = $dtmin;
+  $cont       = 1;
+  while ($dtcorrente <= $dtmax) {
+   array_push($datasnot, $dtcorrente->format('Y-m-d'));
+   $cont++;
+   $dtcorrente->addDay(1);
+
   }
 
-  public static function casosDescartadoSomados() {
-   $datas = COVID::where('resultado', 'DESCARTADO')->get('dt_resultado')->min('dt_resultado');
-   $dados               = COVID::where('resultado', 'DESCARTADO')->orderBy('dt_resultado')->get(['dt_resultado']);
-   $lista['descartado'] = [];
-   $lista['total'] = [];
+  $qtddia = 1;
+
+  foreach ($datasnot as $dia) {
    $confirmado = 0;
-   $total = 0;
-   $min = $datas;
- 
-   $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
-   $dtmax    = Carbon::now(); //->addDay(300);
-   $datasnot = [];
- 
-   $dtcorrente = $dtmin;
-   $cont       = 1;
-   while ($dtcorrente <= $dtmax) {
-    array_push($datasnot, $dtcorrente->format('Y-m-d'));
-    $cont++;
-    $dtcorrente->addDay(1);
- 
-   }
- 
-   $qtddia = 1;
- 
-   foreach ($datasnot as $dia) {
-  //    $confirmado = 0; 
-    foreach ($dados as $coleta) {
- 
-     if ($coleta->dt_resultado == $dia) {
-      $total++;
-      $confirmado++;
-     }
+   foreach ($dados as $coleta) {
+
+    if ($coleta->dt_resultado == $dia) {
+     $total++;
+     $confirmado++;
     }
-    array_push($lista['descartado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
    }
-    array_push($lista['total'],$total);
-   return $lista;
- 
+   array_push($lista['descartado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+  }
+  array_push($lista['total'], $total);
+  return $lista;
+
+ }
+
+ public static function casosDescartadoSomados() {
+  $datas               = COVID::where('resultado', 'DESCARTADO')->get('dt_resultado')->min('dt_resultado');
+  $dados               = COVID::where('resultado', 'DESCARTADO')->orderBy('dt_resultado')->get(['dt_resultado']);
+  $lista['descartado'] = [];
+  $lista['total']      = [];
+  $confirmado          = 0;
+  $total               = 0;
+  $min                 = $datas;
+
+  $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+  $dtmax    = Carbon::now(); //->addDay(300);
+  $datasnot = [];
+
+  $dtcorrente = $dtmin;
+  $cont       = 1;
+  while ($dtcorrente <= $dtmax) {
+   array_push($datasnot, $dtcorrente->format('Y-m-d'));
+   $cont++;
+   $dtcorrente->addDay(1);
+
   }
 
+  $qtddia = 1;
 
+  foreach ($datasnot as $dia) {
+   //    $confirmado = 0;
+   foreach ($dados as $coleta) {
+
+    if ($coleta->dt_resultado == $dia) {
+     $total++;
+     $confirmado++;
+    }
+   }
+   array_push($lista['descartado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+  }
+  array_push($lista['total'], $total);
+  return $lista;
+
+ }
 
  public static function casosConfirmadoDiarios() {
-    $datas = COVID::where('resultado', 'CONFIRMADO')->get('dt_resultado')->min('dt_resultado');
-    $dados               = COVID::where('resultado', 'CONFIRMADO')->orderBy('dt_resultado')->get(['dt_resultado']);
-    $lista['confirmado'] = [];
-    $lista['total'] = [];
-    $confirmado = 0;
-    $total = 0;
-    $min = $datas;
-  
-    $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
-    $dtmax    = Carbon::now(); //->addDay(300);
-    $datasnot = [];
-  
-    $dtcorrente = $dtmin;
-    $cont       = 1;
-    while ($dtcorrente <= $dtmax) {
-     array_push($datasnot, $dtcorrente->format('Y-m-d'));
-     $cont++;
-     $dtcorrente->addDay(1);
-  
+  $datas               = COVID::where('resultado', 'CONFIRMADO')->get('dt_resultado')->min('dt_resultado');
+  $dados               = COVID::where('resultado', 'CONFIRMADO')->orderBy('dt_resultado')->get(['dt_resultado']);
+  $lista['confirmado'] = [];
+  $lista['total']      = [];
+  $confirmado          = 0;
+  $total               = 0;
+  $min                 = $datas;
+
+  $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+  $dtmax    = Carbon::now(); //->addDay(300);
+  $datasnot = [];
+
+  $dtcorrente = $dtmin;
+  $cont       = 1;
+  while ($dtcorrente <= $dtmax) {
+   array_push($datasnot, $dtcorrente->format('Y-m-d'));
+   $cont++;
+   $dtcorrente->addDay(1);
+
+  }
+
+  $qtddia = 1;
+
+  foreach ($datasnot as $dia) {
+   $confirmado = 0;
+   foreach ($dados as $coleta) {
+
+    if ($coleta->dt_resultado == $dia) {
+     $total++;
+     $confirmado++;
     }
-  
-    $qtddia = 1;
-  
-    foreach ($datasnot as $dia) {
-        $confirmado = 0; 
-     foreach ($dados as $coleta) {
-      
-      if ($coleta->dt_resultado == $dia) {
-       $total++;
-       $confirmado++;
-      }
-    
-     }
-     array_push($lista['confirmado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
-    }
-     array_push($lista['total'],$total);
-    return $lista;
-  
+
    }
+   array_push($lista['confirmado'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+  }
+  array_push($lista['total'], $total);
+  return $lista;
+
+ }
+
+ public static function painel() {
+
+  $dados               = COVID::get('resultado');
+  $lista['confirmado'] = 0;
+  $lista['suspeito']   = 0;
+  $lista['descartado'] = 0;
+  $lista['excluido']   = 0;
+  $lista['obito']      = 0;
+  $lista['total']      = 0;
+
+  foreach ($dados as $key => $resultado) {
+   if ('CONFIRMADO' == $resultado->resultado) {
+    $lista['confirmado']++;
+    $lista['total']++;
+   }
+   if ('EXCLUIDO' == $resultado->resultado) {
+    $lista['excluido']++;
+    $lista['total']++;
+   }
+   if ('AGUARDANDO RESULTADO' == $resultado->resultado) {
+    $lista['suspeito']++;
+    $lista['total']++;
+   }
+   if ('DESCARTADO' == $resultado->resultado) {
+    $lista['descartado']++;
+    $lista['total']++;
+   }
+   if ('OBITO' == $resultado->resultado) {
+    $lista['obito']++;
+    $lista['total']++;
+   }
+
+  }
+  return $lista;
+ }
+
+ public static function obitosSomados() {
+  $datas          = COVID::where('resultado', 'OBITO')->get('dt_resultado')->min('dt_resultado');
+  $dados          = COVID::where('resultado', 'OBITO')->orderBy('dt_resultado')->get(['dt_resultado']);
+  $lista['obito'] = [];
+  $lista['total'] = [];
+  $confirmado     = 0;
+  $total          = 0;
+  $min            = $datas;
+
+  $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+  $dtmax    = Carbon::now(); //->addDay(300);
+  $datasnot = [];
+
+  $dtcorrente = $dtmin;
+  $cont       = 1;
+  while ($dtcorrente <= $dtmax) {
+   array_push($datasnot, $dtcorrente->format('Y-m-d'));
+   $cont++;
+   $dtcorrente->addDay(1);
+
+  }
+
+  $qtddia = 1;
+
+  foreach ($datasnot as $dia) {
+   //    $confirmado = 0;
+   foreach ($dados as $coleta) {
+
+    if ($coleta->dt_resultado == $dia) {
+     $total++;
+     $confirmado++;
+    }
+   }
+   array_push($lista['obito'], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+  }
+  array_push($lista['total'], $total);
+  return $lista;
+
+ }
+
+ public static function resultadoSomados($valor) {
+  $datas = COVID::where('resultado', $valor)->get('dt_resultado')->min('dt_resultado');
+  if ($datas == null) {
+   $lista          = [];
+   $lista[$valor]  = ['data' => Carbon::now()->format('Y-m-d'), 'total' => 0, 'qtdia' => 0];
+   $lista['total'] = 0;
+   return $lista;
+  }
+
+  $dados          = COVID::where('resultado', $valor)->orderBy('dt_resultado')->get(['dt_resultado']);
+  $lista[$valor]  = [];
+  $lista['total'] = [];
+  $confirmado     = 0;
+  $total          = 0;
+  $min            = $datas;
+
+  $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+  $dtmax    = Carbon::now(); //->addDay(300);
+  $datasnot = [];
+
+  $dtcorrente = $dtmin;
+  $cont       = 1;
+  while ($dtcorrente <= $dtmax) {
+   array_push($datasnot, $dtcorrente->format('Y-m-d'));
+   $cont++;
+   $dtcorrente->addDay(1);
+
+  }
+
+  $qtddia = 1;
+
+  foreach ($datasnot as $dia) {
+   //    $confirmado = 0;
+   foreach ($dados as $coleta) {
+
+    if ($coleta->dt_resultado == $dia) {
+     $total++;
+     $confirmado++;
+    }
+   }
+   array_push($lista[$valor], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+  }
+  $lista['total']= $total;
+  return $lista;
+
+ }
 
 }

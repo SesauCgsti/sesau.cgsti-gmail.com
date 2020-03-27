@@ -23,12 +23,17 @@
         color: #2b711e;
         -webkit-text-stroke:thick
     }
+    .excluido{
+        color: #ff7905;
+        -webkit-text-stroke:thick
+    }
     .suspeito{
         color:#fbdd09;
         -webkit-text-stroke:thick
     }
     .total{
-        -webkit-text-stroke:thick
+        -webkit-text-stroke:thick;
+        color:white;
     }
 
     .bg-confirmado {
@@ -48,30 +53,44 @@
         <div class="col-md-12">
             <div class="row">
                    
-                <div class="col-3 mb-3 border-dark  ">
+                <div class="col-2 mb-3 border-dark  ">
                     <div class="card  bg-confirmado text-capitalize text-center confirmado text-bold ">
-                        <h3 class="mt-3"> CONFIRMADOS</h3>
+                        <h4 class="mt-3 pb-3"> CONFIRMADO</h4>
                     <h3 class="numero"> {{$lista['confirmado']}}</h3>
                     </div>
                 </div>
 
-                <div class="col-3 mb-3 border-dark  ">
+                <div class="col-2 mb-3 border-dark  ">
                         <div class="card  bg-confirmado text-capitalize text-center text-warning suspeito  ">
-                            <h3 class="mt-3"> SUSPEITOS</h3>
+                            <h4 class="mt-1"> AGUARDANDO RESULTADO </h4>
                             <h3 class="numero"> {{$lista['suspeito']}}</h3>
                         </div>
                     </div>
 
-                    <div class="col-3 mb-3 border-dark  ">
+                    <div class="col-2 mb-3 border-dark  ">
                             <div class="card  bg-confirmado text-capitalize text-center descartado  ">
-                                <h3 class="mt-3"> DESCARTADOS</h3>
+                                <h4 class="mt-3 pb-3"> DESCARTADO</h4>
    
                                 <h3 class="numero"> {{$lista['descartado']}}</h3>
                             </div>
                         </div>
-                        <div class="col-3 mb-3 border-dark  ">
-                                <div class="card  bg-confirmado text-capitalize text-center text-white  ">
-                                    <h3 class="mt-3"> TOTAL</h3>
+                        <div class="col-2 mb-3 border-dark  ">
+                                <div class="card  bg-confirmado text-capitalize text-center excluido  ">
+                                    <h4 class="mt-3 pb-3"> EXCLUIDO</h4>
+       
+                                    <h3 class="numero"> {{$lista['excluido']}}</h3>
+                                </div>
+                            </div>
+                            <div class="col-2 mb-3 border-dark  ">
+                                    <div class="card  bg-confirmado text-capitalize text-center text-secondary total   ">
+                                        <h4 class="mt-3 pb-3">OBITO</h4>
+           
+                                        <h3 class="numero"> {{$lista['obito']}}</h3>
+                                    </div>
+                                </div>
+                        <div class="col-2 mb-3 border-dark  ">
+                                <div class="card  bg-confirmado text-capitalize text-center text-white total ">
+                                        <h4 class="mt-3 pb-3"> TOTAL</h4>
                                     <h3 class="numero"> {{$lista['total']}}</h3>
                                 </div>
                             </div>
@@ -81,7 +100,7 @@
 
                     <div class="row">
                   
-                    <div class="col-4 mb-3">
+                    <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/confirmado') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -95,7 +114,7 @@
                             </a>
                     </div>
                    
-                    <div class="col-4 mb-3">
+                    <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/diario') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -110,7 +129,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-3">
+                    <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/somatorio') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -125,7 +144,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-3">
+                    <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/sexo') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -140,7 +159,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-3">
+                    <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/idade') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -155,7 +174,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-3">
+                    <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/mapa') }}">
                                 <div class="card border-primary ">
                                     <div class="bg-primary">
@@ -168,7 +187,7 @@
                             </a>
                     </div>
 
-                    {{-- <div class="col-4 mb-3">
+                    {{-- <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('covid/grafico/evolucaofiltro') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">

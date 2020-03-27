@@ -140,4 +140,28 @@ $url = Excel::import(
 
   }
 
+
+
+
+
+// public function covidExcel(Request $request) {
+
+  
+//   try {
+//     Excel::import(
+//       new COVIDImportCollection,
+//       $request->excel);
+    
+//     //return $url;
+//       return  redirect('covid/cep')->with('status', 'Atualizando dados de CEP');
+  
+//   } catch (\Throwable $th) {
+//     return redirect()
+//     ->back()
+//     ->with('error', 'Falha ao fazer upload')
+//     ->withInput();
+//   }
+
+//  }
+
 }
