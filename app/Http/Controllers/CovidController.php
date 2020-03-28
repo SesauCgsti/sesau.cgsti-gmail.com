@@ -23,12 +23,13 @@ class CovidController extends Controller {
 
 
   public function covidExcel(Request $request) {
-
-    $upload = $request->excel->storeAs('public/excel', 'covid.xlsx');
+  $upload = $request->excel->storeAs('public/excel', 'covid.xlsx');
   
     $out = new \Symfony\Component\Console\Output\ConsoleOutput();
     $out->writeln("importando excel");
     //  with('status','importando xml');
+  
+    $upload = $request->excel->storeAs('public/excel', 'covid.xlsx');
   
     if (!$upload) {
      return redirect()
