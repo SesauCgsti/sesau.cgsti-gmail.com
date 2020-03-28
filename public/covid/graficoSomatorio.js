@@ -43,12 +43,13 @@ function formatarData(data){
     dataini=descartados[0].data;
     datafim=descartados[descartados.length-1].data;
     descartados
-    var dataPointsDescartados=[];
-    var dataPointsNotificados=[];
-    var dataPointsConfirmados=[];
+    var dataPointsDescartados = [];
+    var dataPointsNotificados = [];
+    var dataPointsConfirmados = [];
+    var dataPointsObitos = [];
+    var dataPointsExcluidos = [];
     
-    
-    
+                
     
     
     dataPointsDescartados=dados.descartados.map(element=>{
@@ -61,7 +62,14 @@ function formatarData(data){
     
     dataPointsNotificados=dados.notificados.map(element=>{
         return { x:formatarData(element.data), y:element.total }
-    })			 
+    })			
+    dataPointsObitos = dados.obitos.map(element => {
+        return { x: formatarData(element.data), y: element.total }
+    })
+
+    dataPointsExcluidos = dados.excluidos.map(element => {
+        return { x: formatarData(element.data), y: element.total }
+    })            
     
     datainicio=formatarData(dataini).toLocaleDateString();
     //datainicio='dois';
@@ -124,7 +132,25 @@ function formatarData(data){
             markerSize: 10,
         
             dataPoints: dataPointsDescartados
-        },
+            },
+            {
+                type: "line",
+                axisYType: "secondary",
+                name: `EXCLUIDOS ( ${dados.total[0].t_excluido} )`,
+                showInLegend: true,
+                markerSize: 10,
+                indexLabel: `{y}`,
+                dataPoints: dataPointsExcluidos
+            },
+            {
+                type: "line",
+                axisYType: "secondary",
+                name: `OBITOS ( ${dados.total[0].t_obito} )`,
+                showInLegend: true,
+                markerSize: 10,
+                indexLabel: `{y}`,
+                dataPoints: dataPointsObitos
+            },
         
     ]
     });

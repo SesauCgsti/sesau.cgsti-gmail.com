@@ -6,7 +6,7 @@
 
 <div class="border rounded m-2 ">
 	
-	<div id="chartContainerIdade" style="height: 300px; width: 100%;"></div>
+	<div id="chartContainerIdade" class="grafico" style="height: 300px; width: 100%;"></div>
 </div>
 <div>
 	

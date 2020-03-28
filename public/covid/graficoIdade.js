@@ -9,6 +9,8 @@ async function buscarDadosIdade() {
     })
         .then(response => {
             console.log(response)
+           
+           
             carregarGraficoIdade(response.data)
         })
         .catch(error => {

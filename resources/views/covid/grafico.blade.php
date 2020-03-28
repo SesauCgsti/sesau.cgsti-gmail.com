@@ -4,14 +4,14 @@
 @section('content')
 
 
-<div class="border rounded m-2 ">
+<div class="border rounded m-2 mb-5 ">
 
 	<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </div>
-<div class="border rounded m-2 ">
+<div class="border rounded m-2 mb-5 ">
 	<div id="chartContainerConfirmado" style="height: 300px; width: 100%;"></div>
 </div>
-<div class="border rounded m-2 row ">
+<div class="border rounded m-2 row mb-5 ">
 		<div id="chartContainerConfirmadoDIA" style="height: 300px; width: 100%;"></div>
 	<button class="btn col ml-2 mr-2 btn-primary " onclick="updateChart(11)">Ultimos 10 dias</button>
 	<button class="btn col ml-2 mr-2 btn-primary" onclick="updateChart(21)">Ultimos 20 dias</button>
@@ -22,18 +22,16 @@
 
 	
 </div>
-<div class="border rounded m-2 ">
+<div class="border rounded m-2 mb-5 ">
 	<div id="chartContainerSomatorio" style="height: 300px; width: 100%;"></div>
 </div>
-<div class="border rounded m-2 ">
+<div class="border rounded m-2 mb-5 ">
 	<div id="chartContainerSexo" style="height: 300px; width: 100%;"></div>
 </div>
-<div class="border rounded m-2 ">
+<div class="border rounded m-2 mb-5 ">
 	<div id="chartContainerIdade" style="height: 300px; width: 100%;"></div>
 </div>
-<div class="border rounded m-2 ">
-	<div id="chartContainerSexo" style="height: 300px; width: 100%;"></div>
-</div>
+
 <script src="/js/canvasjs.min.js"></script>
 
 <script src="/covid/grafico.js"></script>

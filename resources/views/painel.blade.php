@@ -53,42 +53,42 @@
         <div class="col-md-12">
             <div class="row">
                    
-                <div class="col-2 mb-3 border-dark  ">
+                <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
                     <div class="card  bg-confirmado text-capitalize text-center confirmado text-bold ">
                         <h4 class="mt-3 pb-3"> CONFIRMADO</h4>
                     <h3 class="numero"> {{$lista['confirmado']}}</h3>
                     </div>
                 </div>
 
-                <div class="col-2 mb-3 border-dark  ">
+                <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
                         <div class="card  bg-confirmado text-capitalize text-center text-warning suspeito  ">
                             <h4 class="mt-1"> AGUARDANDO RESULTADO </h4>
                             <h3 class="numero"> {{$lista['suspeito']}}</h3>
                         </div>
                     </div>
 
-                    <div class="col-2 mb-3 border-dark  ">
+                    <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
                             <div class="card  bg-confirmado text-capitalize text-center descartado  ">
                                 <h4 class="mt-3 pb-3"> DESCARTADO</h4>
    
                                 <h3 class="numero"> {{$lista['descartado']}}</h3>
                             </div>
                         </div>
-                        <div class="col-2 mb-3 border-dark  ">
+                        <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
                                 <div class="card  bg-confirmado text-capitalize text-center excluido  ">
                                     <h4 class="mt-3 pb-3"> EXCLUIDO</h4>
        
                                     <h3 class="numero"> {{$lista['excluido']}}</h3>
                                 </div>
                             </div>
-                            <div class="col-2 mb-3 border-dark  ">
+                            <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
                                     <div class="card  bg-confirmado text-capitalize text-center text-secondary total   ">
                                         <h4 class="mt-3 pb-3">OBITO</h4>
            
                                         <h3 class="numero"> {{$lista['obito']}}</h3>
                                     </div>
                                 </div>
-                        <div class="col-2 mb-3 border-dark  ">
+                        <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
                                 <div class="card  bg-confirmado text-capitalize text-center text-white total ">
                                         <h4 class="mt-3 pb-3"> TOTAL</h4>
                                     <h3 class="numero"> {{$lista['total']}}</h3>
@@ -100,7 +100,7 @@
 
                     <div class="row">
                   
-                    <div class="col-4 mb-2">
+                    <div class="col-sm-12 col-md-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/confirmado') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -114,7 +114,7 @@
                             </a>
                     </div>
                    
-                    <div class="col-4 mb-2">
+                    <div class="col-sm-12 col-md-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/diario') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -129,7 +129,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-2">
+                    <div class="col-sm-12 col-md-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/somatorio') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -144,7 +144,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-2">
+                    <div class="col-sm-12 col-md-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/sexo') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -159,7 +159,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-2">
+                    <div class="col-sm-12 col-md-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/grafico/idade') }}">
                                 <div class="card border-primary">
                                         <div class="bg-primary">
@@ -174,7 +174,7 @@
                             </a>
                     </div>
 
-                    <div class="col-4 mb-2">
+                    <div class="col-sm-12 col-md-4 mb-2">
                             <a target="_blank" href="{{ url('/covid/mapa') }}">
                                 <div class="card border-primary ">
                                     <div class="bg-primary">

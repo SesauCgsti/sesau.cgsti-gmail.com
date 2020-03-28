@@ -38,12 +38,12 @@ function carregaRadio() {
         this._div.innerHTML = `
     <input type="radio" name="filtro" onclick=" confnot()" value="equipe"> CONFIRMADOS E SUSPEITOS
     <input type="radio" name="filtro" id="todos" onclick=" todos()" checked value="unidade"> TODOS
-    <input type="radio" name="filtro" onclick=" confirmados()" value="equipe"> CONFIRMADOS
+    <input type="radio" name="filtro" onclick="confirmados()" value="equipe"> CONFIRMADOS
     <input type="radio" name="filtro" onclick=" notificados()" value="equipe"> SUSPEITOS
     <input type="radio" name="filtro" onclick=" descartados()" value="equipe"> DESCARTADOS
     `
     };
-    radioInfo.addTo(map);
+   // radioInfo.addTo(map);
 }
 // function myFunction(valor) {
 //     removeAllMarkers()
@@ -68,6 +68,8 @@ function todos() {
     map.addLayer(markersNotificados);
     map.addLayer(markesConfirmados);
     map.addLayer(markersDescartados);
+    map.addLayer(markersExcluidos);
+    map.addLayer(markersObitos);
 }
 
 
@@ -86,6 +88,17 @@ function confirmados() {
 
 }
 
+function obitos() {
+    removeAllMarkers();
+    map.addLayer(markersObitos);
+
+}
+function excluidos() {
+    removeAllMarkers();
+    map.addLayer(markersExcluidos);
+
+}
+
 function descartados() {
     removeAllMarkers();
     map.addLayer(markersDescartados);
@@ -98,6 +111,11 @@ function notificados() {
 
 }
 
+function suspeitos() {
+    removeAllMarkers();
+    map.addLayer(markersNotificados);
+
+}
 //     map.addLayer(markersLayer);
 // }
 

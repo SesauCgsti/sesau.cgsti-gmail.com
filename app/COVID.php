@@ -363,7 +363,7 @@ class COVID extends Model {
   $datas = COVID::where('resultado', $valor)->get('dt_resultado')->min('dt_resultado');
   if ($datas == null) {
    $lista          = [];
-   $lista[$valor]  = ['data' => Carbon::now()->format('Y-m-d'), 'total' => 0, 'qtdia' => 0];
+   $lista[$valor]  = [['data' => Carbon::now()->format('Y-m-d'), 'total' => 0, 'qtdia' => 0]];
    $lista['total'] = 0;
    return $lista;
   }
@@ -405,5 +405,149 @@ class COVID extends Model {
   return $lista;
 
  }
+
+ public static function coletadoSomados($valor) {
+    $datas = COVID::where('resultado', $valor)->get('dt_coleta')->min('dt_coleta');
+    if ($datas == null) {
+     $lista          = [];
+     $lista[$valor]  = [['data' => Carbon::now()->format('Y-m-d'), 'total' => 0, 'qtdia' => 0]];
+     $lista['total'] = 0;
+     return $lista;
+    }
+  
+    $dados          = COVID::where('resultado', $valor)->orderBy('dt_coleta')->get(['dt_coleta']);
+    $lista[$valor]  = [];
+    $lista['total'] = [];
+    $confirmado     = 0;
+    $total          = 0;
+    $min            = $datas;
+  
+    $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+    $dtmax    = Carbon::now(); //->addDay(300);
+    $datasnot = [];
+  
+    $dtcorrente = $dtmin;
+    $cont       = 1;
+    while ($dtcorrente <= $dtmax) {
+     array_push($datasnot, $dtcorrente->format('Y-m-d'));
+     $cont++;
+     $dtcorrente->addDay(1);
+  
+    }
+  
+    $qtddia = 1;
+  
+    foreach ($datasnot as $dia) {
+     //    $confirmado = 0;
+     foreach ($dados as $coleta) {
+  
+      if ($coleta->dt_coleta == $dia) {
+       $total++;
+       $confirmado++;
+      }
+     }
+     array_push($lista[$valor], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+    }
+    $lista['total']= $total;
+    return $lista;
+  
+   }
+  
+
+   public static function resultadoDiario($valor) {
+    $datas = COVID::where('resultado', $valor)->get('dt_resultado')->min('dt_resultado');
+    if ($datas == null) {
+     $lista          = [];
+     $lista[$valor]  = [['data' => Carbon::now()->format('Y-m-d'), 'total' => 0, 'qtdia' => 0]];
+     $lista['total'] = 0;
+     return $lista;
+    }
+  
+    $dados          = COVID::where('resultado', $valor)->orderBy('dt_resultado')->get(['dt_resultado']);
+    $lista[$valor]  = [];
+    $lista['total'] = [];
+    $confirmado     = 0;
+    $total          = 0;
+    $min            = $datas;
+  
+    $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+    $dtmax    = Carbon::now(); //->addDay(300);
+    $datasnot = [];
+  
+    $dtcorrente = $dtmin;
+    $cont       = 1;
+    while ($dtcorrente <= $dtmax) {
+     array_push($datasnot, $dtcorrente->format('Y-m-d'));
+     $cont++;
+     $dtcorrente->addDay(1);
+  
+    }
+  
+    $qtddia = 1;
+  
+    foreach ($datasnot as $dia) {
+        $confirmado = 0;
+     foreach ($dados as $coleta) {
+  
+      if ($coleta->dt_resultado == $dia) {
+       $total++;
+       $confirmado++;
+      }
+     }
+     array_push($lista[$valor], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+    }
+    $lista['total']= $total;
+    return $lista;
+  
+   }
+
+   public static function coletadoDiario($valor) {
+    $datas = COVID::where('resultado', $valor)->get('dt_coleta')->min('dt_coleta');
+    if ($datas == null) {
+     $lista          = [];
+     $lista[$valor]  = [['data' => Carbon::now()->format('Y-m-d'), 'total' => 0, 'qtdia' => 0]];
+     $lista['total'] = 0;
+     return $lista;
+    }
+  
+    $dados          = COVID::where('resultado', $valor)->orderBy('dt_coleta')->get(['dt_coleta']);
+    $lista[$valor]  = [];
+    $lista['total'] = [];
+    $confirmado     = 0;
+    $total          = 0;
+    $min            = $datas;
+  
+    $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
+    $dtmax    = Carbon::now(); //->addDay(300);
+    $datasnot = [];
+  
+    $dtcorrente = $dtmin;
+    $cont       = 1;
+    while ($dtcorrente <= $dtmax) {
+     array_push($datasnot, $dtcorrente->format('Y-m-d'));
+     $cont++;
+     $dtcorrente->addDay(1);
+  
+    }
+  
+    $qtddia = 1;
+  
+    foreach ($datasnot as $dia) {
+        $confirmado = 0;
+     foreach ($dados as $coleta) {
+  
+      if ($coleta->dt_coleta == $dia) {
+       $total++;
+       $confirmado++;
+      }
+     }
+     array_push($lista[$valor], ['data' => $dia, 'total' => $confirmado, 'qtdia' => $qtddia++]);
+    }
+    $lista['total']= $total;
+    return $lista;
+  
+   }
+  
+
 
 }

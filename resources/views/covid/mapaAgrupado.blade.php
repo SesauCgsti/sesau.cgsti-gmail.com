@@ -49,9 +49,9 @@
     height:50px;
 }
 
-td >img{
-  width: 25px;
-  height: 25px;
+img{
+  width: 45px;
+  height: 45px;
 }
 td,th{
   
@@ -132,8 +132,8 @@ border-width:3px;
 </div>
 <div class="col">
 
-
-  <table style="" >
+<h5 ><img class="confirmado" src="/images/COVID_CONFIRMADO.png" alt="" srcset="">Total de Casos confirmados   <span id="t_conf"> 0</span> </h5>
+  {{--<table style="" >
     <thead>
     <th>SUSPEITO</th>
     <th>CONFIRMADO</th>
@@ -141,7 +141,7 @@ border-width:3px;
     <th>NÃO LOCALIZADO</th>
     <th>TOTAL</th>
     </thead>
-    <tbody>
+     <tbody>
       <tr>
         <td><img class="notificado" src="/images/covid.png" alt="" srcset=""> <span id="t_not"> 0</span></td>
         <td><img class="confirmado" src="/images/COVID_CONFIRMADO.png" alt="" srcset=""> <span id="t_conf"> 0</span></td>
@@ -149,11 +149,11 @@ border-width:3px;
         <td> <span id="t_nao">0</span></td>
         <td> <span id="t_total">0</span></td>
       </tr>
-    </tbody>
+    </tbody> 
 
 
   </table>
-
+--}}
 </div>
 </div>
       

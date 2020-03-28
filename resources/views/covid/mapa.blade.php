@@ -126,16 +126,20 @@ border-width:3px;
     <th>SUSPEITO</th>
     <th>CONFIRMADO</th>
     <th>DESCARTADO</th>
+    <th>EXCLUIDO</th>
+    <th>OBITO</th>
     <th>NÃO LOCALIZADO</th>
     <th>TOTAL</th>
     </thead>
     <tbody>
       <tr>
-        <td><img class="notificado" src="/images/covid.png" alt="" srcset=""> <span id="t_not"> 0</span></td>
-        <td><img class="confirmado" src="/images/COVID_CONFIRMADO.png" alt="" srcset=""> <span id="t_conf"> 0</span></td>
-        <td> <img class="descartado" src="/images/covid.png" alt="" srcset=""> <span id="t_desc">0</span></td>
+        <td onclick="suspeitos()"><img class="notificado" src="/images/covid.png" alt="" srcset=""> <span id="t_not"> 0</span></td>
+        <td onclick="confirmados()"><img class="confirmado" src="/images/COVID_CONFIRMADO.png" alt="" srcset=""> <span id="t_conf"> 0</span></td>
+        <td onclick="descartados()" > <img class="descartado" src="/images/covid.png" alt="" srcset=""> <span id="t_desc">0</span></td>
+        <td onclick="excluidos()" > <img  src="/images/covid.png" alt="" srcset=""> <span id="t_exc">0</span></td>
+        <td onclick="obitos()" > <img  src="/images/covid.png" alt="" srcset=""> <span id="t_obi">0</span></td>
         <td> <span id="t_nao">0</span></td>
-        <td> <span id="t_total">0</span></td>
+        <td onclick="todos()" > <span id="t_total">0</span></td>
       </tr>
     </tbody>
 
@@ -171,11 +175,7 @@ border-width:3px;
       ).setView(initialCoordinates, initialZoomLevel);
       </script>
       
-    <!-- <script src="bd.js"></script> -->
-  
-  <!-- <script src="unidadeteste.js"></script>  -->
-    <!-- ARRy de equipes -->
-    <!-- <script src="equipes.js"></script> -->
+   
 
 
     <script src="/covid/camadasControl.js"></script>

@@ -1,137 +1,151 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <title>Laravel</title>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-            img{
-                width: 200px;
-                height: 200px;
-            }
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-            .full-height {
-                height: 100vh;
-            }
+    <!-- Styles -->
+    <style>
+        html,
+        body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            height: 100vh;
+            margin: 0;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        img {
+            width: 20vmax;
 
-            .position-ref {
-                position: relative;
-            }
+            height: 20vmax;
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .full-height {
+            height: 100vh;
+        }
 
-            .content {
-                text-align: center;
-            }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .position-ref {
+            position: relative;
+        }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
 
-            .login > a {
-                color: #636b6f;
-                padding: 10 25px;
-                font-size: 25px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        .content {
+            text-align: center;
+        }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Entrar</a>
-                    @else
-                        <a href="{{ route('login') }}">Entrar</a>
+        .title {
+            font-size: 2em;
+            font-weight: 800
+        }
 
-                        {{-- @if (Route::has('register'))
+
+        .links>a {
+            color: #636b6f;
+            display: block;
+            padding: 0 25px;
+            margin-bottom: 1em;
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .login>a {
+            color: #636b6f;
+            padding: 10 25px;
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+            <a href="{{ url('/home') }}">Entrar</a>
+            @else
+            <a href="{{ route('login') }}">Entrar</a>
+
+            {{-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
-                        @endif --}}
-                    @endauth
+            @endif --}}
+            @endauth
+        </div>
+        @endif
+
+        <div class="content">
+            <div class=" m-b-md">
+                <a target="_blank" href="{{ url('/painel') }}">
+                    <img src="images/web.png" alt="">
+                </a>
+                <div class="login ">
+
+                    <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
+
+
                 </div>
-            @endif
-
-            <div class="content">
-                <div class=" m-b-md">
-                        <a target="_blank" href="{{ url('/painel') }}">
-                    <img src="images/web.png" alt=""> 
-                        </a>
-                    <div class="login ">
-                  
-                <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
-     
-
-                    </div>
-                      <div class="title">
-                            Notifica Campo Grande
-                          </div> 
-                </div>
-
-                <div class="links">
-                    <a target="_blank" href="http://www.campogrande.ms.gov.br/sesau/covid19/">Página covid-19 PMCG</a>
-                  
-                   
-                        @auth
-                            <a  href="{{ url('/home') }}">Carregar Dados</a>
-                            <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
-                            <a target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS CONFIRMADOS</a>
-                        @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
-                        <a target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS CONFIRMADOS</a>
- 
-    
-                            {{-- @if (Route::has('registloginer'))
-                                <a href="{{ route('register') }}">Register</a>
-                            @endif --}}
-                        @endauth
-                   
-               
-                
+                <div class="title">
+                    Notifica Campo Grande
                 </div>
             </div>
+
+            <div class="links row">
+                <a class="col-md-6 col-sm-12" target="_blank"
+                    href="http://www.campogrande.ms.gov.br/sesau/covid19/">Boletim covid-19 PMCG</a>
+
+
+                @auth
+                <a class="col-md-6 col-sm-12 btn" href="{{ url('/home') }}">Carregar Dados</a>
+                <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
+                <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS
+                    CONFIRMADOS</a>
+                @else
+
+                <a class="col-md-6 col-sm-12 btn" class="" target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
+                <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS
+                    CONFIRMADOS</a>
+                    <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/covid/grafico') }}"> gráficos</a>
+    
+
+                {{-- @if (Route::has('registloginer'))
+                                <a href="{{ route('register') }}">Register</a>
+                @endif --}}
+                @endauth
+
+
+
+            </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

@@ -44,109 +44,43 @@ class DadosController extends Controller {
 
  public function casosDiarios(Request $request) {
 
-  $datas = COVID::groupBy('dt_coleta')->orderBy('dt_coleta')->get('dt_coleta');
-  //return $datas;
 
-  $dados = COVID::orderBy('dt_coleta')->get(['dt_coleta', 'resultado']);
-
-  $dadosc = COVID::casosConfirmadoDiarios();
+  $dadosc = COVID::resultadoDiario('CONFIRMADO');
   //return $dadosc;
-  $lista['confirmados'] = $dadosc['confirmado'];
+  $lista['confirmados'] = $dadosc['CONFIRMADO'];
 
-  $dadosd               = COVID::casosDescartadoDIA();
-  $lista['descartados'] = $dadosd['descartado'];
+  $dadosd= COVID::resultadoDiario('DESCARTADO');
+  $dadoso= COVID::resultadoDiario('OBITO');
+  $dadose= COVID::resultadoDiario('EXCLUIDO');
+  $dadosl= COVID::coletadoDiario('AGUARDANDO RESULTADO');
+  $lista['descartados'] = $dadosd['DESCARTADO'];
 
-  $lista['notificados'] = [];
-  // $lista['descartados']=[];
-  $lista['total'] = [];
+  $lista['obitos'] = $dadoso['OBITO'];
+  $lista['excluidos'] = $dadose['EXCLUIDO'];
 
-  $confirmado   = 0;
-  $notificado   = 0;
-  $descartado   = 0;
-  $total        = 0;
-  $t_confirmado = 0;
-  $t_notificado = 0;
-  $t_descartado = 0;
+  $lista['notificados'] = $dadosl['AGUARDANDO RESULTADO'];
+  $lista['total']=[];
+  
+  array_push($lista['total'],
+   ['total'       => (intval($dadosl['total']) + intval($dadosc['total']) + intval($dadosd['total']) + intval($dadoso['total']) + intval($dadose['total'])),
+    't_notificado' => $dadosl['total'],
+    't_confirmado' => $dadosc['total'],
+    't_descartado' => $dadosd['total'],
+    't_obito'      => $dadoso['total'],
+    't_excluido'   => $dadose['total'],
 
-///funçao para fazer o range de datas
-  $min = $datas->min('dt_coleta');
-
-  $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
-  $dtmax    = Carbon::now();
-  $datasnot = [];
-
-  $dtcorrente = $dtmin;
-  $cont       = 1;
-  while ($dtcorrente <= $dtmax) {
-   array_push($datasnot, $dtcorrente->format('Y-m-d'));
-   $cont++;
-   $dtcorrente->addDay(1);
-
-  }
-///final funcao data
-
-  foreach ($datasnot as $dia) {
-   $confirmado = 0;
-   $notificado = 0;
-   $descartado = 0;
-
-   foreach ($dados as $coleta) {
-    $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-    $out->writeln($coleta->dt_coleta);
-    $out->writeln($dia);
-    $out->writeln($coleta->resultado);
-
-    if ($coleta->dt_coleta == $dia) {
-     if ("DESCARTADO" == $coleta->resultado) {
-      $descartado++;
-      $total++;
-      $t_descartado++;
-     }
-     if ("CONFIRMADO" == $coleta->resultado) {
-      $confirmado++;
-      $total++;
-      $t_confirmado++;
-     }
-     if ("AGUARDANDO RESULTADO" == $coleta->resultado) {
-      $notificado++;
-      $total++;
-      $t_notificado++;
-     }
-
-    }
-
-   }
-
-   //  array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
-   array_push($lista['notificados'], ['data' => $dia, 'total' => $notificado]);
-   // array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
-   //  "notificado" => $notificado, 'descartado' => $descartado]);
-
-   //   $dados[$dia] =$dados->countBy(function ($dias) {
-   //     return $dias->dt_coleta == $dia->dt_coleta;
-
-   // });
-  }
-  array_push($lista['total'], ['total' => $total, 't_notificado' => $t_notificado, 't_confirmado' => $t_confirmado, 't_descartado' => $t_descartado]);
-
-  //$dados; //=$dados->groupBy('resultado');
-  return $lista;
+   ]);
+   return $lista;
 
  }
 
  public function casosDiariosSomatorio(Request $request) {
 
-  $datas = COVID::groupBy('dt_coleta')->orderBy('dt_coleta')->get('dt_coleta');
-  //return $datas;
-
-  $dados = COVID::orderBy('dt_coleta')->get(['dt_coleta', 'resultado']);
-  $total = COVID::count();
-
-  //$dadosc= COVID::casosConfirmadoSomados();
   $dadosc = COVID::resultadoSomados('CONFIRMADO');
 
-  //$dadosd= COVID::casosDescartadoSomados();
   $dadosd = COVID::resultadoSomados('DESCARTADO');
+
+  $dadosl = COVID::coletadoSomados('AGUARDANDO RESULTADO');
 
   $dadose = COVID::resultadoSomados('EXCLUIDO');
   $dadoso = COVID::resultadoSomados('OBITO');
@@ -157,75 +91,19 @@ class DadosController extends Controller {
   $lista['excluidos']   = $dadose['EXCLUIDO'];
   $lista['obitos']      = $dadoso['OBITO'];
 
-  $lista['notificados'] = [];
+  $lista['notificados'] = $dadosl['AGUARDANDO RESULTADO'];
 
   $lista['total'] = [];
 
-  $confirmado = 0;
-  $notificado = 0;
-  $descartado = 0;
-  //$total=0;
-  $t_confirmado = 0;
-  $t_notificado = 0;
-  $t_descartado = 0;
-  ///funçao para fazer o range de datas
-  $min = $datas->min('dt_coleta');
+  array_push($lista['total'],
+   ['total'       => (intval($dadosl['total']) + intval($dadosc['total']) + intval($dadosd['total']) + intval($dadoso['total']) + intval($dadose['total'])),
+    't_notificado' => $dadosl['total'],
+    't_confirmado' => $dadosc['total'],
+    't_descartado' => $dadosd['total'],
+    't_obito'      => $dadoso['total'],
+    't_excluido'   => $dadose['total'],
 
-  $dtmin    = Carbon::createFromFormat('Y-m-d H:i:s', $min . ' 00:00:00'); //->format('Y-m-d');
-  $dtmax    = Carbon::now();
-  $datasnot = [];
-
-  $dtcorrente = $dtmin;
-  $cont       = 1;
-  while ($dtcorrente <= $dtmax) {
-   array_push($datasnot, $dtcorrente->format('Y-m-d'));
-   $cont++;
-   $dtcorrente->addDay(1);
-
-  }
-  ///final funcao data
-
-  foreach ($datasnot as $dia) {
-
-   foreach ($dados as $coleta) {
-
-    if ($coleta->dt_coleta == $dia) {
-     if ("DESCARTADO" == $coleta->resultado) {
-      $descartado++;
-      //    $total++;
-      $t_descartado++;
-     }
-
-     if ("CONFIRMADO" == $coleta->resultado) {
-      $confirmado++;
-      //  $total++;
-      $t_confirmado++;
-     }
-
-     if ("AGUARDANDO RESULTADO" == $coleta->resultado) {
-      $notificado++;
-      // $total++;
-      $t_notificado++;
-     }
-
-    }
-
-   }
-
-   //   array_push($lista['confirmados'],['data' => $dia, 'total' => $confirmado]);
-   array_push($lista['notificados'], ['data' => $dia, 'total' => $notificado]);
-   // array_push($lista['descartados'],['data' => $dia, 'total' => $descartado]);
-
-  }
-  array_push($lista['total'], 
-  ['total' => (intval($t_notificado) + intval($dadosc['total']) + intval($dadosd['total']) + intval($dadoso['total']) + intval( $dadose['total'])),
-   't_notificado'                       => $t_notificado,
-   't_confirmado'                       => $dadosc['total'],
-   't_descartado'                       => $dadosd['total'],
-   't_obito'                            => $dadoso['total'],
-   't_excluido'                         => $dadose['total'],
-
-  ]);
+   ]);
 
   return $lista;
 
