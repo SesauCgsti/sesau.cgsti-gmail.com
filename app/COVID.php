@@ -291,6 +291,7 @@ class COVID extends Model {
   $lista['descartado'] = 0;
   $lista['excluido']   = 0;
   $lista['obito']      = 0;
+  $lista['suspeitoSuspeito']   = 0;
   $lista['total']      = 0;
 
   foreach ($dados as $key => $resultado) {
@@ -302,6 +303,10 @@ class COVID extends Model {
     $lista['excluido']++;
     $lista['total']++;
    }
+   if ('SUSPEITO' == $resultado->resultado) {
+      $lista['suspeitoSuspeito']++;
+      $lista['total']++;
+     }
    if ('AGUARDANDO RESULTADO' == $resultado->resultado) {
     $lista['suspeito']++;
     $lista['total']++;

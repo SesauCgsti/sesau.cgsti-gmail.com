@@ -66,6 +66,12 @@
                             <h3 class="numero"> {{$lista['suspeito']}}</h3>
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
+                        <div class="card  bg-confirmado text-capitalize text-center text-warning suspeito  ">
+                            <h4 class="mt-3 pb-3"> SUSPEITO </h4>
+                            <h3 class="numero"> {{$lista['suspeitoSuspeito']}}</h3>
+                        </div>
+                    </div>
 
                     <div class="col-sm-12 col-md-2 mb-3 border-dark  ">
                             <div class="card  bg-confirmado text-capitalize text-center descartado  ">
