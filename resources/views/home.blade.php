@@ -51,56 +51,56 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-                <div class="row">
-                   
-                        <div class="col-2 mb-3 border-dark  ">
-                            <div class="card  bg-confirmado text-capitalize text-center confirmado text-bold ">
-                                <h4 class="mt-3 pb-3"> CONFIRMADO</h4>
-                            <h3 class="numero"> {{$lista['confirmado']}}</h3>
-                            </div>
-                        </div>
-        
-                        <div class="col-2 mb-3 border-dark  ">
-                                <div class="card  bg-confirmado text-capitalize text-center text-warning suspeito  ">
-                                    <h4 class="mt-1"> AGUARDANDO RESULTADO </h4>
-                                    <h3 class="numero"> {{$lista['suspeito']}}</h3>
-                                </div>
-                            </div>
-                            <div class="col-2 mb-3 border-dark  ">
-                                <div class="card  bg-confirmado text-capitalize text-center text-warning suspeito  ">
-                                    <h4 class="mt-3 pb-3"> SUSPEITO </h4>
-                                    <h3 class="numero"> {{$lista['suspeitoSuspeito']}}</h3>
-                                </div>
-                            </div>
-        
-                            <div class="col-2 mb-3 border-dark  ">
-                                    <div class="card  bg-confirmado text-capitalize text-center descartado  ">
-                                        <h4 class="mt-3 pb-3"> DESCARTADO</h4>
-           
-                                        <h3 class="numero"> {{$lista['descartado']}}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-2 mb-3 border-dark  ">
-                                        <div class="card  bg-confirmado text-capitalize text-center excluido  ">
-                                            <h4 class="mt-3 pb-3"> EXCLUIDO</h4>
-               
-                                            <h3 class="numero"> {{$lista['excluido']}}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mb-3 border-dark  ">
-                                            <div class="card  bg-confirmado text-capitalize text-center text-secondary total   ">
-                                                <h4 class="mt-3 pb-3">OBITO</h4>
-                   
-                                                <h3 class="numero"> {{$lista['obito']}}</h3>
-                                            </div>
-                                        </div>
-                                <div class="col-2 mb-3 border-dark  ">
-                                        <div class="card  bg-confirmado text-capitalize text-center text-white total ">
-                                                <h4 class="mt-3 pb-3"> TOTAL</h4>
-                                            <h3 class="numero"> {{$lista['total']}}</h3>
-                                        </div>
-                                    </div>
+            <div class="row">
+
+                <div class=" caixa-painel col-sm-12 mb-1 border-dark   ">
+                    <div class="card bg-confirmado text-capitalize text-center confirmado text-bold ">
+                        <h5 class="mt-3 pb-3"> CONFIRMADO</h5>
+                        <h4 class="numero"> {{$lista['confirmado']}}</h4>
                     </div>
+                </div>
+
+                <div class="caixa-painel col-sm-12 mb-1 border-dark  ">
+                    <div class="card  bg-confirmado text-capitalize text-center text-warning suspeito  ">
+                        <h5 class="mt-1 "> AGUARDANDO RESULTADO </h5>
+                        <h4 class="numero"> {{$lista['suspeito']}}</h4>
+                    </div>
+                </div>
+                <div class="caixa-painel col-sm-12 mb-1 border-dark  ">
+                    <div class="card  bg-confirmado text-capitalize text-center text-warning suspeito  ">
+                        <h5 class="mt-3 pb-3"> SUSPEITO </h5>
+                        <h4 class="numero"> {{$lista['suspeitoSuspeito']}}</h4>
+                    </div>
+                </div>
+
+                <div class="caixa-painel col-sm-12 mb-1 border-dark  ">
+                    <div class="card  bg-confirmado text-capitalize text-center descartado  ">
+                        <h5 class="mt-3 pb-3"> DESCARTADO</h5>
+
+                        <h4 class="numero"> {{$lista['descartado']}}</h4>
+                    </div>
+                </div>
+                <div class="caixa-painel col-sm-12 mb-1 border-dark  ">
+                    <div class="card  bg-confirmado text-capitalize text-center excluido  ">
+                        <h5 class="mt-3 pb-3"> EXCLUIDO</h5>
+
+                        <h4 class="numero"> {{$lista['excluido']}}</h4>
+                    </div>
+                </div>
+                <div class="caixa-painel col-sm-12 mb-1 border-dark  ">
+                    <div class="card  bg-confirmado text-capitalize text-center text-secondary total   ">
+                        <h5 class="mt-3 pb-3">OBITO</h5>
+
+                        <h4 class="numero"> {{$lista['obito']}}</h4>
+                    </div>
+                </div>
+                <div class="caixa-painel col-sm-12 mb-1 border-dark  ">
+                    <div class="card  bg-confirmado text-capitalize text-center text-white total ">
+                        <h5 class="mt-3 pb-3"> TOTAL</h5>
+                        <h4 class="numero"> {{$lista['total']}}</h4>
+                    </div>
+                </div>
+            </div>
         
 
             <div class="card ">
