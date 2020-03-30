@@ -8,7 +8,7 @@ class CepAberto extends Model
 {
     
  protected $table = 'coordenadas';
- protected $connection = 'cepaberto';
+ //protected $connection = 'cepaberto';
  protected $fillable = [
     'cep' ,
     'logradouro' ,

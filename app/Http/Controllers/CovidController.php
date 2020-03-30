@@ -22,26 +22,27 @@ class CovidController extends Controller {
   }
 
 
+
   public function covidExcel(Request $request) {
 
-  // $upload = $request->excel->storeAs('public/excel', 'covid.xlsx');
   
-  //   $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-  //   $out->writeln("importando excel");
-    //  with('status','importando xml');
-  
-    $upload = $request->excel->storeAs('public/excel', 'covid.xlsx');
-  
-    if (!$upload) {
-     return redirect()
+    try {
+      Excel::import(
+        new COVIDImportCollection,
+        $request->excel);
+      
+      //return $url;
+        return  redirect('covid/cep')->with('status', 'Atualizando dados de CEP');
+    
+    } catch (\Throwable $th) {
+      return redirect()
       ->back()
       ->with('error', 'Falha ao fazer upload')
       ->withInput();
     }
   
-    return redirect('covid/excel')->with('status', 'Importando dados para o banco');
-  
    }
+  
   
 
   public function excel() {
