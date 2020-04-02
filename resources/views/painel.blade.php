@@ -206,7 +206,7 @@ box-sizing: border-box;
                     </a>
                 </div>
 
-                <div class="col-sm-12 col-md-4 mb-2">
+                <!-- <div class="col-sm-12 col-md-4 mb-2">
                     <a target="_blank" href="{{ url('/covid/mapa') }}">
                         <div class="card border-primary ">
                             <div class="bg-primary">
@@ -218,7 +218,7 @@ box-sizing: border-box;
 
                         </div>
                     </a>
-                </div>
+                </div> -->
 
                 {{-- <div class="col-4 mb-2">
                             <a target="_blank" href="{{ url('covid/grafico/evolucaofiltro') }}">

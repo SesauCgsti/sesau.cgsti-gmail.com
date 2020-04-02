@@ -131,9 +131,9 @@
                 @else
 
                 <a class="col-md-6 col-sm-12 btn" class="" target="_blank" href="{{ url('/painel') }}">Visualizar painel</a>
-                <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS
-                    CONFIRMADOS</a>
-                    <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/covid/grafico') }}"> gráficos</a>
+                <!-- <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/covid/mapaAgrupado') }}"> MAPA CASOS
+                    CONFIRMADOS</a> -->
+                    <!-- <a class="col-md-6 col-sm-12 btn" target="_blank" href="{{ url('/covid/grafico') }}"> gráficos</a> -->
     
 
                 {{-- @if (Route::has('registloginer'))
